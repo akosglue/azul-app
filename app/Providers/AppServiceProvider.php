@@ -2,7 +2,9 @@
 
 namespace App\Providers;
 
+use App\Listeners\ConsoleReporter;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\Event;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -11,7 +13,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        //
+        $this->app->bind('Symfony\Component\Console\Output\OutputInterface',
+            'Symfony\Component\Console\Output\ConsoleOutput');
     }
 
     /**
@@ -19,6 +22,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        Event::subscribe(ConsoleReporter::class);
     }
 }

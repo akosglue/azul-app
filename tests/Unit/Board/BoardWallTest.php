@@ -6,7 +6,6 @@ use App\Board\BoardWall;
 use App\Board\Exception\BoardWallColorAlreadyFilledException;
 use App\Tile\Color;
 use App\Tile\Tile;
-use App\Tile\TileCollection;
 
 test('testIsAnyRowCompleted_EmptyWall_False',function (){
     $wall = new BoardWall();

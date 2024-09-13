@@ -11,9 +11,16 @@
 |
 */
 
+use App\Board\BoardRow;
+use App\Game\Table;
+use App\Tile\Color;
+use App\Tile\Marker;
+use App\Tile\Tile;
+use App\Tile\TileCollection;
+
 pest()->extend(Tests\TestCase::class)
  // ->use(Illuminate\Foundation\Testing\RefreshDatabase::class)
-    ->in('Feature');
+    ->in('Feature', 'Unit');
 
 /*
 |--------------------------------------------------------------------------
@@ -41,7 +48,15 @@ expect()->extend('toBeOne', function () {
 |
 */
 
-function something()
+function createGameTable(): \App\Game\Table
 {
-    // ..
+    return new Table(new Marker());
+}
+function addTile(BoardRow $row, Tile $tile): void
+{
+    $row->placeTiles(new TileCollection([$tile]));
+}
+function buildTiles(int $numberOfTiles): TileCollection
+{
+    return new TileCollection(array_fill(1, $numberOfTiles, new Tile(Color::BLUE)));
 }

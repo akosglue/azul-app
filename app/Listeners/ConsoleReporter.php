@@ -11,7 +11,6 @@ use App\Events\WallTiledEvent;
 use App\Player\Player;
 use App\Player\PlayerCollection;
 use App\Tile\Color;
-use Illuminate\Console\OutputStyle;
 use Illuminate\Events\Dispatcher;
 use Symfony\Component\Console\Output\OutputInterface;
 

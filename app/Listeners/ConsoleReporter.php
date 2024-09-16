@@ -187,10 +187,11 @@ class ConsoleReporter
 
         // floor
         foreach ($this->players as $player) {
+            $this->write("floor " . $player->getName()." -> _");
             foreach ($player->getBoard()->getFloorTiles() as $tile) {
                 $this->drawTile($tile);
             }
-            $this->write("\t\t\t");
+            $this->write("_\t\t\t");
         }
         $this->writeln('');
     }

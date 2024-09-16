@@ -36,6 +36,8 @@ class Board
 
     private array $rowNumberToDiscard = [];
 
+    private int $score = 0;
+
     public function __construct(?BoardWall $wall = null)
     {
         $this->wall = $wall ?? new BoardWall;
@@ -119,12 +121,17 @@ class Board
                 if (! $this->wall->isColorFilledByRow($row)) {
                     $this->wall->fillColor($row);
                     $this->rowNumberToDiscard[$row->getRowNumber()] = true;
+                    $this->score += 1;
                 } else {
                     foreach ($row->getTiles() as $tile) {
                         $this->placeOnFloor($tile);
                     }
                 }
             }
+        }
+        foreach ($this->getFloorTiles() as $c => $tile) {
+            $penalty = ($c <= 1) ? -1 : ($c <= 4 ? -2 : -3);
+            $this->score += $penalty;
         }
     }
 
@@ -174,5 +181,10 @@ class Board
     public function placeMarker(\App\Tile\Marker $marker): void
     {
         $this->placeOnFloor($marker);
+    }
+
+    public function getScore(): int
+    {
+        return $this->score;
     }
 }

@@ -9,9 +9,8 @@ use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
-class RoundCreatedEvent
+class RoundCreatedEvent extends GameEvent
 {
-    use Dispatchable, InteractsWithSockets, SerializesModels;
 	protected GameRound $round;
 
 	public function __construct(GameRound $round)

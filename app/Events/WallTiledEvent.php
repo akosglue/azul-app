@@ -9,9 +9,8 @@ use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
-class WallTiledEvent
+class WallTiledEvent extends GameEvent
 {
-    use Dispatchable, InteractsWithSockets, SerializesModels;
 	private Player $player;
 
 	public function __construct(Player $player)

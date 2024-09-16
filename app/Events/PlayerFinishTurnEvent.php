@@ -10,9 +10,8 @@ use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
-class PlayerFinishTurnEvent
+class PlayerFinishTurnEvent extends GameEvent
 {
-    use Dispatchable, InteractsWithSockets, SerializesModels;
 	private Player $player;
 	protected GameRound $round;
 

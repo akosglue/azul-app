@@ -40,17 +40,17 @@ class ConsoleReporter
     {
         $events->listen(
             RoundCreatedEvent::class,
-            [ConsoleReporter::class, 'onRoundCreated']
+            [$this, 'onRoundCreated']
         );
 
         $events->listen(
             PlayerFinishTurnEvent::class,
-            [ConsoleReporter::class, 'onPlayerFinishTurn']
+            [$this, 'onPlayerFinishTurn']
         );
 
         $events->listen(
             WallTiledEvent::class,
-            [ConsoleReporter::class, 'onWallTiled']
+            [$this, 'onWallTiled']
         );
     }
 

@@ -50,6 +50,7 @@ test('testDiscardTiles_TileOnFloor_FloorEmpty', function () {
     $this->assertEquals(0, $board->getFloorTilesCount());
     $this->assertEquals(0, $board->getRowTilesCount($row));
     $this->assertTrue($board->isWallColorFilled($color, $row));
+    $this->assertEquals(0, $board->getScore()); // 1 lone tile on pattern, 1 lone tile on floor = 0 score
 });
 
 test('testDiscardTiles_RowsFull_AllTilesDiscarded', function () {
@@ -63,6 +64,7 @@ test('testDiscardTiles_RowsFull_AllTilesDiscarded', function () {
     $board->doWallTiling();
     $tiles = $board->discardTiles();
     $this->assertCount(10, $tiles);
+    $this->assertEquals(5, $board->getScore()); //each row was full
 });
 
 test('testDiscardTiles_EmptyRows_NothingDiscarded', function () {
@@ -70,6 +72,7 @@ test('testDiscardTiles_EmptyRows_NothingDiscarded', function () {
     $board->doWallTiling();
     $tiles = $board->discardTiles();
     $this->assertCount(0, $tiles);
+    $this->assertEquals(0, $board->getScore());
 });
 
 test('testDiscardTiles_2Row1Tile_NothingDiscarded', function () {
@@ -83,6 +86,7 @@ test('testDiscardTiles_2Row1Tile_NothingDiscarded', function () {
     $tiles = $board->discardTiles();
     $this->assertCount(0, $tiles);
     $this->assertEquals(1, $board->getRowTilesCount($rowNumber));
+    $this->assertEquals(0, $board->getScore()); // no full row
 });
 
 test('testDiscardTiles_2Row2Tile_1TileDiscarded1OnWall', function () {
@@ -95,4 +99,5 @@ test('testDiscardTiles_2Row2Tile_1TileDiscarded1OnWall', function () {
     $tiles = $board->discardTiles();
     $this->assertCount(1, $tiles);
     $this->assertEquals(0, $board->getRowTilesCount($rowNumber));
+    $this->assertEquals(1, $board->getScore()); // one full row
 });

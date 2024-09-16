@@ -11,6 +11,7 @@ use App\Listeners\ConsoleReporter;
 use App\Player\Player;
 use App\Player\PlayerCollection;
 use Illuminate\Console\Command;
+use Illuminate\Events\Dispatcher;
 
 class PlayGameCommand extends Command
 {
@@ -21,7 +22,7 @@ class PlayGameCommand extends Command
     /**
      * Execute the console command.
      */
-    public function handle()
+    public function handle(Dispatcher $dispatcher)
     {
 		$this->info('Let\'s start!');
 
@@ -30,8 +31,8 @@ class PlayGameCommand extends Command
 			new Player(new Board(), 'Petr', ),
 		]);
 
-        new ConsoleReporter($players,$this->output);
-		$game = new Game(Bag::create());
+        $dispatcher->subscribe(new ConsoleReporter($players,$this->output));
+		$game = new Game(Bag::create(),$dispatcher);
 
 		$game->play($players);
 

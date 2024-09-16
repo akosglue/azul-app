@@ -5,21 +5,18 @@ declare(strict_types=1);
 namespace App\Events;
 
 use App\Game\GameRound;
-use Illuminate\Broadcasting\InteractsWithSockets;
-use Illuminate\Foundation\Events\Dispatchable;
-use Illuminate\Queue\SerializesModels;
 
 class RoundCreatedEvent extends GameEvent
 {
-	protected GameRound $round;
+    protected GameRound $round;
 
-	public function __construct(GameRound $round)
-	{
-		$this->round = $round;
-	}
+    public function __construct(GameRound $round)
+    {
+        $this->round = $round;
+    }
 
-	public function getRound(): GameRound
-	{
-		return $this->round;
-	}
+    public function getRound(): GameRound
+    {
+        return $this->round;
+    }
 }

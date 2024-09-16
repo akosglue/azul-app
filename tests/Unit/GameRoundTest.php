@@ -6,7 +6,7 @@ use App\Tile\Color;
 use App\Tile\Tile;
 use App\Tile\TileCollection;
 
-test('testKeepPlaying_EmptyFactoriesAndTable_False',function (){
+test('testKeepPlaying_EmptyFactoriesAndTable_False', function () {
     $t = createGameTable();
     $round = new GameRound($t,
         [

@@ -9,12 +9,12 @@ use App\Player\Move;
 
 abstract class AbstractStrategy
 {
-	protected Board $board;
+    protected Board $board;
 
-	public function __construct(Board $board)
-	{
-		$this->board = $board;
-	}
+    public function __construct(Board $board)
+    {
+        $this->board = $board;
+    }
 
-	abstract public function getNextMove(FactoryCollection $factories, Table $table): ?Move;
+    abstract public function getNextMove(FactoryCollection $factories, Table $table): ?Move;
 }

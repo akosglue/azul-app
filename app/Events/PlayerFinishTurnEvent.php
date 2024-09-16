@@ -6,28 +6,26 @@ namespace App\Events;
 
 use App\Game\GameRound;
 use App\Player\Player;
-use Illuminate\Broadcasting\InteractsWithSockets;
-use Illuminate\Foundation\Events\Dispatchable;
-use Illuminate\Queue\SerializesModels;
 
 class PlayerFinishTurnEvent extends GameEvent
 {
-	private Player $player;
-	protected GameRound $round;
+    private Player $player;
 
-	public function __construct(Player $player, GameRound $round)
-	{
-		$this->player = $player;
-		$this->round = $round;
-	}
+    protected GameRound $round;
 
-	public function getRound(): GameRound
-	{
-		return $this->round;
-	}
+    public function __construct(Player $player, GameRound $round)
+    {
+        $this->player = $player;
+        $this->round = $round;
+    }
 
-	public function getPlayer(): Player
-	{
-		return $this->player;
-	}
+    public function getRound(): GameRound
+    {
+        return $this->round;
+    }
+
+    public function getPlayer(): Player
+    {
+        return $this->player;
+    }
 }

@@ -2,9 +2,7 @@
 
 namespace App\Providers;
 
-use App\Listeners\ConsoleReporter;
 use Illuminate\Support\ServiceProvider;
-use Illuminate\Support\Facades\Event;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -20,7 +18,5 @@ class AppServiceProvider extends ServiceProvider
     /**
      * Bootstrap any application services.
      */
-    public function boot(): void
-    {
-    }
+    public function boot(): void {}
 }

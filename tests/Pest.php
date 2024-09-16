@@ -50,7 +50,7 @@ expect()->extend('toBeOne', function () {
 
 function createGameTable(): \App\Game\Table
 {
-    return new Table(new Marker());
+    return new Table(new Marker);
 }
 function addTile(BoardRow $row, Tile $tile): void
 {

@@ -8,7 +8,7 @@ use App\Tile\TileCollection;
 
 interface ITileStorage
 {
-	public function take(string $color): TileCollection;
+    public function take(string $color): TileCollection;
 
-	public function getTilesCount(?string $color = null): int;
+    public function getTilesCount(?string $color = null): int;
 }

@@ -24,18 +24,18 @@ class PlayGameCommand extends Command
      */
     public function handle(Dispatcher $dispatcher)
     {
-		$this->info('Let\'s start!');
+        $this->info('Let\'s start!');
 
-		$players = new PlayerCollection([
-			new Player(new Board(), 'Ivan', ),
-			new Player(new Board(), 'Petr', ),
-		]);
+        $players = new PlayerCollection([
+            new Player(new Board, 'Ivan'),
+            new Player(new Board, 'Petr'),
+        ]);
 
-        $dispatcher->subscribe(new ConsoleReporter($players,$this->output));
-		$game = new Game(Bag::create(),$dispatcher);
+        $dispatcher->subscribe(new ConsoleReporter($players, $this->output));
+        $game = new Game(Bag::create(), $dispatcher);
 
-		$game->play($players);
+        $game->play($players);
 
-		return 0;
-	}
+        return 0;
+    }
 }

@@ -5,12 +5,12 @@ use App\Tile\Color;
 use App\Tile\Tile;
 use App\Tile\TileCollection;
 
-test('testGetNext_NoTiles_NoNext',function (){
-    $bag = new Bag();
+test('testGetNext_NoTiles_NoNext', function () {
+    $bag = new Bag;
     $this->assertEmpty($bag->getNextPlate());
 });
 
-test('testGetNext_GameTiles_Got25Plates',function (){
+test('testGetNext_GameTiles_Got25Plates', function () {
     $bag = Bag::create();
     for ($j = 0; $j < 25; $j++) {
         $this->assertNotEmpty($bag->getNextPlate());
@@ -18,14 +18,14 @@ test('testGetNext_GameTiles_Got25Plates',function (){
     $this->assertEmpty($bag->getNextPlate());
 });
 
-test('testNextPlate_5Tiles_Get4TilesOnce',function (){
-    $bag = (new Bag())->addTiles(Color::BLACK, 5);
+test('testNextPlate_5Tiles_Get4TilesOnce', function () {
+    $bag = (new Bag)->addTiles(Color::BLACK, 5);
     $this->assertCount(4, $bag->getNextPlate());
     $this->assertCount(0, $bag->getNextPlate());
 });
 
-test('testNextPlate_5TilesRefill4_Get4TilesTwice',function (){
-    $bag = (new Bag())->addTiles(Color::BLACK, 5);
+test('testNextPlate_5TilesRefill4_Get4TilesTwice', function () {
+    $bag = (new Bag)->addTiles(Color::BLACK, 5);
     $this->assertCount(4, $firstPlate = $bag->getNextPlate());
     $this->assertCount(0, $bag->getNextPlate());
     $bag->discardTiles($firstPlate);
@@ -34,7 +34,7 @@ test('testNextPlate_5TilesRefill4_Get4TilesTwice',function (){
 });
 
 test('testNextPlate_HasRedInTilesAndBlackInDiscard_UseDiscardedOnlyAfterTilesEmpty', function () {
-    $bag = (new Bag())->addTiles($tileColor = Color::BLACK, 4);
+    $bag = (new Bag)->addTiles($tileColor = Color::BLACK, 4);
     $bag->discardTiles(new TileCollection([
         new Tile(Color::RED),
         new Tile(Color::RED),

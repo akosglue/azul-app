@@ -6,5 +6,5 @@ namespace App\Game\Exception;
 
 class MarkerAlreadyTakenException extends \Exception
 {
-	// TODO move all exceptions to common folder?
+    // TODO move all exceptions to common folder?
 }

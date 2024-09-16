@@ -14,74 +14,76 @@ use Illuminate\Events\Dispatcher;
 
 class Game
 {
-	private Bag $bag;
-	private ?GameRound $round = null;
+    private Bag $bag;
+
+    private ?GameRound $round = null;
 
     private Dispatcher $dispatcher;
 
-	public function __construct(Bag $bag,Dispatcher $dispatcher)
-	{
-		$this->bag = $bag;
+    public function __construct(Bag $bag, Dispatcher $dispatcher)
+    {
+        $this->bag = $bag;
         $this->dispatcher = $dispatcher;
-	}
+    }
 
-	public function play(PlayerCollection $players): void
-	{
-		while (true) {
-			if (!$this->round) {
-				$this->round = $this->createRound($players);
+    public function play(PlayerCollection $players): void
+    {
+        while (true) {
+            if (! $this->round) {
+                $this->round = $this->createRound($players);
                 $this->dispatch(new RoundCreatedEvent($this->round));
-			}
-			if ($this->round->canContinue()) {
-				$table = $this->round->getTable();
-				foreach ($players as $player) {
-					$move = $player->getNextMove(
-						$this->round->getFactories(),
-						$table
-					);
-					if (!$move) {
-						continue;
-					}
-					if ($move->isFromTable() && $table->hasMarker()) {
-						$player->takeMarker($table->takeMarker());
-					}
-					$storage = $move->getStorage();
-					$tiles = $storage->take($move->getColor());
-					$player->placeTiles($tiles, $move->getRowNumber());
-					if (!$move->isFromTable()) {
-						$table->addToCenterPile($storage->takeAll());
-					}
+            }
+            if ($this->round->canContinue()) {
+                $table = $this->round->getTable();
+                foreach ($players as $player) {
+                    $move = $player->getNextMove(
+                        $this->round->getFactories(),
+                        $table
+                    );
+                    if (! $move) {
+                        continue;
+                    }
+                    if ($move->isFromTable() && $table->hasMarker()) {
+                        $player->takeMarker($table->takeMarker());
+                    }
+                    $storage = $move->getStorage();
+                    $tiles = $storage->take($move->getColor());
+                    $player->placeTiles($tiles, $move->getRowNumber());
+                    if (! $move->isFromTable()) {
+                        $table->addToCenterPile($storage->takeAll());
+                    }
                     $this->dispatch(new PlayerFinishTurnEvent($player, $this->round));
-				}
-			} else {
-				$this->round = null;
-				foreach ($players as $player) {
-					$player->doWallTiling();
+                }
+            } else {
+                $this->round = null;
+                foreach ($players as $player) {
+                    $player->doWallTiling();
                     $this->dispatch(new WallTiledEvent($player));
-					$this->bag->discardTiles($player->discardTiles());
-					if ($player->isGameOver()) {
-						// TODO rework game cycle, round could end at each turn, game over on each turn
-						return;
-					}
-				}
-			}
-		}
-	}
+                    $this->bag->discardTiles($player->discardTiles());
+                    if ($player->isGameOver()) {
+                        // TODO rework game cycle, round could end at each turn, game over on each turn
+                        return;
+                    }
+                }
+            }
+        }
+    }
 
-	private function createRound(PlayerCollection $players): GameRound
-	{
-		$table = new Table(new Marker());
-		return new GameRound(
-			$table,
-			[
-				new Factory($this->bag->getNextPlate()),
-				new Factory($this->bag->getNextPlate()),
-				new Factory($this->bag->getNextPlate()),
-				new Factory($this->bag->getNextPlate()),
-				new Factory($this->bag->getNextPlate()),
-			]
-		);
-	}
+    private function createRound(PlayerCollection $players): GameRound
+    {
+        $table = new Table(new Marker);
+
+        return new GameRound(
+            $table,
+            [
+                new Factory($this->bag->getNextPlate()),
+                new Factory($this->bag->getNextPlate()),
+                new Factory($this->bag->getNextPlate()),
+                new Factory($this->bag->getNextPlate()),
+                new Factory($this->bag->getNextPlate()),
+            ]
+        );
+    }
 
     private function dispatch(GameEvent $event): void
     {

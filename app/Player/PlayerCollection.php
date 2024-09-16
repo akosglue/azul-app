@@ -11,11 +11,11 @@ use Webmozart\Assert\Assert;
  */
 class PlayerCollection extends \SplStack
 {
-	public function __construct(array $players = [])
-	{
-		Assert::allIsInstanceOf($players, Player::class);
-		foreach ($players as $player) {
-			$this->push($player);
-		}
-	}
+    public function __construct(array $players = [])
+    {
+        Assert::allIsInstanceOf($players, Player::class);
+        foreach ($players as $player) {
+            $this->push($player);
+        }
+    }
 }

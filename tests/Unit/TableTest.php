@@ -5,7 +5,7 @@ use App\Tile\Color;
 use App\Tile\Tile;
 use App\Tile\TileCollection;
 
-test('testCountTotal_2DifferentColors_Total2',function (){
+test('testCountTotal_2DifferentColors_Total2', function () {
     $table = createGameTable();
     $table->addToCenterPile(new TileCollection([
         new Tile(Color::RED),
@@ -14,7 +14,7 @@ test('testCountTotal_2DifferentColors_Total2',function (){
     $this->assertEquals(2, $table->getTilesCount());
 });
 
-test('testCountTotal_2SameColors_Total2',function (){
+test('testCountTotal_2SameColors_Total2', function () {
     $table = createGameTable();
     $table->addToCenterPile(new TileCollection([
         new Tile(Color::RED),
@@ -23,12 +23,12 @@ test('testCountTotal_2SameColors_Total2',function (){
     $this->assertEquals(2, $table->getTilesCount());
 });
 
-test('testCountTotal_Empty_Total0',function (){
+test('testCountTotal_Empty_Total0', function () {
     $table = createGameTable();
     $this->assertEquals(0, $table->getTilesCount());
 });
 
-test('testCountByColor',function (){
+test('testCountByColor', function () {
     $table = createGameTable();
     $table->addToCenterPile(new TileCollection([
         new Tile(Color::RED),
@@ -44,7 +44,7 @@ test('testCountByColor',function (){
     $this->assertEquals(0, $table->getTilesCount(Color::YELLOW));
 });
 
-test('testTakeMarker_HasMarker_NoMarkerAfter',function (){
+test('testTakeMarker_HasMarker_NoMarkerAfter', function () {
     $table = createGameTable();
     $this->assertTrue($table->hasMarker());
     $marker = $table->takeMarker();
@@ -52,14 +52,14 @@ test('testTakeMarker_HasMarker_NoMarkerAfter',function (){
     $this->assertFalse($table->hasMarker());
 });
 
-test('testTakeMarker_Twice_GotException',function (){
+test('testTakeMarker_Twice_GotException', function () {
     $table = createGameTable();
     $table->takeMarker();
     $this->expectException(MarkerAlreadyTakenException::class);
     $table->takeMarker();
 });
 
-test('testTake_HasMarker_MarkerLeft',function (){
+test('testTake_HasMarker_MarkerLeft', function () {
     $table = createGameTable();
     $color = Color::RED;
     $table->addToCenterPile(new TileCollection([

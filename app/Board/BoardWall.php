@@ -92,4 +92,18 @@ class BoardWall
     {
         return $this->pattern[$row->getRowNumber()];
     }
+
+    public function getColumn($idx): array
+    {
+        $colors = [];
+        foreach (self::PATTERN as $rowNumber => $rowColors) {
+            foreach ($rowColors as $k => $color) {
+                if ($k == $idx) {
+                    $colors[$color] = $this->pattern[$rowNumber][$color];
+                }
+            }
+        }
+
+        return $colors;
+    }
 }

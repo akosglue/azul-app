@@ -197,7 +197,7 @@ class Board
         return $score;
     }
 
-    private function getAdjacentScoreAbove($placedColor, $slots)
+    private function getAdjacentScoreAboveOrLeft($placedColor, $slots)
     {
         $score = 0;
         foreach ($slots as $color => $slot) {
@@ -239,24 +239,6 @@ class Board
         return $score;
     }
 
-    private function getAdjacentScoreLeft($placedColor, $slots)
-    {
-        $score = 0;
-        foreach ($slots as $color => $slot) {
-            if ($color == $placedColor) {
-                break;
-            }
-            if ($slot) {
-                $score++;
-            }
-            if (! $slot) {
-                $score = 0;
-            }
-        }
-
-        return $score;
-    }
-
     private function getAdjacentScoreRight($placedColor, $slots)
     {
         $score = 0;
@@ -286,9 +268,9 @@ class Board
         $idx = array_search($placedColor, array_keys($pattern));
         $column = $this->wall->getColumn($idx);
 
-        $above = $this->getAdjacentScoreAbove($placedColor, $column);
+        $above = $this->getAdjacentScoreAboveOrLeft($placedColor, $column);
         $below = $this->getAdjacentScoreBelow($placedColor, $column);
-        $left = $this->getAdjacentScoreLeft($placedColor, $pattern);
+        $left = $this->getAdjacentScoreAboveOrLeft($placedColor, $pattern);
         $right = $this->getAdjacentScoreRight($placedColor, $pattern);
 
         $score += $above + $below + $left + $right;

@@ -55,11 +55,11 @@ test('testDiscardTiles_TileOnFloor_FloorEmpty', function () {
 
 test('testDiscardTiles_RowsFull_AllTilesDiscarded', function () {
     $board = new Board;
-    $board->placeTiles(buildTiles(1), Board::ROW_1);
-    $board->placeTiles(buildTiles(2), Board::ROW_2);
-    $board->placeTiles(buildTiles(3), Board::ROW_3);
-    $board->placeTiles(buildTiles(4), Board::ROW_4);
-    $board->placeTiles(buildTiles(5), Board::ROW_5);
+    $board->placeTiles(buildBlueTiles(1), Board::ROW_1);
+    $board->placeTiles(buildBlueTiles(2), Board::ROW_2);
+    $board->placeTiles(buildBlueTiles(3), Board::ROW_3);
+    $board->placeTiles(buildBlueTiles(4), Board::ROW_4);
+    $board->placeTiles(buildBlueTiles(5), Board::ROW_5);
 
     $board->doWallTiling();
     $tiles = $board->discardTiles();
@@ -78,7 +78,7 @@ test('testDiscardTiles_EmptyRows_NothingDiscarded', function () {
 test('testDiscardTiles_2Row1Tile_NothingDiscarded', function () {
     $rowNumber = Board::ROW_2;
     $board = new Board;
-    $board->placeTiles(buildTiles(1), $rowNumber);
+    $board->placeTiles(buildBlueTiles(1), $rowNumber);
 
     $this->assertEquals(1, $board->getRowTilesCount($rowNumber));
 
@@ -92,7 +92,7 @@ test('testDiscardTiles_2Row1Tile_NothingDiscarded', function () {
 test('testDiscardTiles_2Row2Tile_1TileDiscarded1OnWall', function () {
     $rowNumber = Board::ROW_2;
     $board = new Board;
-    $board->placeTiles(buildTiles(2), $rowNumber);
+    $board->placeTiles(buildBlueTiles(2), $rowNumber);
 
     $this->assertEquals(2, $board->getRowTilesCount($rowNumber));
     $board->doWallTiling();

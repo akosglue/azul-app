@@ -56,7 +56,7 @@ function addTile(BoardRow $row, Tile $tile): void
 {
     $row->placeTiles(new TileCollection([$tile]));
 }
-function buildTiles(int $numberOfTiles): TileCollection
+function buildBlueTiles(int $numberOfTiles): TileCollection
 {
     return new TileCollection(array_fill(1, $numberOfTiles, new Tile(Color::BLUE)));
 }

@@ -203,9 +203,9 @@ class Board
         $pattern = $this->getPattern($row);
         $idx = array_search($placedColor, array_keys($pattern));
 
-        $column = $this->wall->getColumn($idx);
+        $slots = $this->wall->getColumn($idx);
 
-        foreach ($column as $color => $slot) {
+        foreach ($slots as $color => $slot) {
             if ($color == $placedColor) {//found same color
                 break;
             }
@@ -226,10 +226,10 @@ class Board
         $pattern = $this->getPattern($row);
         $idx = array_search($placedColor, array_keys($pattern));
 
-        $column = $this->wall->getColumn($idx);
+        $slots = $this->wall->getColumn($idx);
 
         $pivot = false;
-        foreach ($column as $color => $slot) {
+        foreach ($slots as $color => $slot) {
             if ($color == $placedColor) {//found same color
                 $pivot = true;
 
@@ -252,8 +252,8 @@ class Board
     private function getAdjacentScoreLeft($placedColor, $row)
     {
         $score = 0;
-        $pattern = $this->getPattern($row);
-        foreach ($pattern as $color => $slot) {
+        $slots = $this->getPattern($row);
+        foreach ($slots as $color => $slot) {
             if ($color == $placedColor) {
                 break;
             }
@@ -271,9 +271,9 @@ class Board
     private function getAdjacentScoreRight($placedColor, $row)
     {
         $score = 0;
-        $pattern = $this->getPattern($row);
+        $slots = $this->getPattern($row);
         $pivot = false;
-        foreach ($pattern as $color => $slot) {
+        foreach ($slots as $color => $slot) {
             if ($color == $placedColor) {
                 $pivot = true;
 

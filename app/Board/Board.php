@@ -197,14 +197,9 @@ class Board
         return $score;
     }
 
-    private function getAdjacentScoreAbove($placedColor, $row)
+    private function getAdjacentScoreAbove($placedColor, $slots)
     {
         $score = 0;
-        $pattern = $this->getPattern($row);
-        $idx = array_search($placedColor, array_keys($pattern));
-
-        $slots = $this->wall->getColumn($idx);
-
         foreach ($slots as $color => $slot) {
             if ($color == $placedColor) {//found same color
                 break;
@@ -220,14 +215,9 @@ class Board
         return $score;
     }
 
-    private function getAdjacentScoreBelow($placedColor, $row)
+    private function getAdjacentScoreBelow($placedColor, $slots)
     {
         $score = 0;
-        $pattern = $this->getPattern($row);
-        $idx = array_search($placedColor, array_keys($pattern));
-
-        $slots = $this->wall->getColumn($idx);
-
         $pivot = false;
         foreach ($slots as $color => $slot) {
             if ($color == $placedColor) {//found same color
@@ -249,10 +239,9 @@ class Board
         return $score;
     }
 
-    private function getAdjacentScoreLeft($placedColor, $row)
+    private function getAdjacentScoreLeft($placedColor, $slots)
     {
         $score = 0;
-        $slots = $this->getPattern($row);
         foreach ($slots as $color => $slot) {
             if ($color == $placedColor) {
                 break;
@@ -268,10 +257,9 @@ class Board
         return $score;
     }
 
-    private function getAdjacentScoreRight($placedColor, $row)
+    private function getAdjacentScoreRight($placedColor, $slots)
     {
         $score = 0;
-        $slots = $this->getPattern($row);
         $pivot = false;
         foreach ($slots as $color => $slot) {
             if ($color == $placedColor) {
@@ -293,10 +281,16 @@ class Board
     private function calculateScore($placedColor, $row): int
     {
         $score = 1;
-        $above = $this->getAdjacentScoreAbove($placedColor, $row);
-        $below = $this->getAdjacentScoreBelow($placedColor, $row);
-        $left = $this->getAdjacentScoreLeft($placedColor, $row);
-        $right = $this->getAdjacentScoreRight($placedColor, $row);
+
+        $pattern = $this->getPattern($row);
+        $idx = array_search($placedColor, array_keys($pattern));
+        $column = $this->wall->getColumn($idx);
+
+        $above = $this->getAdjacentScoreAbove($placedColor, $column);
+        $below = $this->getAdjacentScoreBelow($placedColor, $column);
+        $left = $this->getAdjacentScoreLeft($placedColor, $pattern);
+        $right = $this->getAdjacentScoreRight($placedColor, $pattern);
+
         $score += $above + $below + $left + $right;
         if (($above || $below) && ($left || $right)) {//tile in intersection
             $score += 1;

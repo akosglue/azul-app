@@ -215,7 +215,7 @@ class Board
         return $score;
     }
 
-    private function getAdjacentScoreBelow($placedColor, $slots)
+    private function getAdjacentScoreBelowOrRight($placedColor, $slots)
     {
         $score = 0;
         $pivot = false;
@@ -224,30 +224,6 @@ class Board
                 $pivot = true;
 
                 continue;
-            }
-            if (! $pivot) {
-                continue;
-            }
-            if ($slot) {
-                $score++;
-            }
-            if (! $slot) {
-                break;
-            }
-        }
-
-        return $score;
-    }
-
-    private function getAdjacentScoreRight($placedColor, $slots)
-    {
-        $score = 0;
-        $pivot = false;
-        foreach ($slots as $color => $slot) {
-            if ($color == $placedColor) {
-                $pivot = true;
-
-                continue; //same tile in row
             }
             if ($pivot && $slot == null) {
                 break; //no more adjacent tile
@@ -269,9 +245,9 @@ class Board
         $column = $this->wall->getColumn($idx);
 
         $above = $this->getAdjacentScoreAboveOrLeft($placedColor, $column);
-        $below = $this->getAdjacentScoreBelow($placedColor, $column);
+        $below = $this->getAdjacentScoreBelowOrRight($placedColor, $column);
         $left = $this->getAdjacentScoreAboveOrLeft($placedColor, $pattern);
-        $right = $this->getAdjacentScoreRight($placedColor, $pattern);
+        $right = $this->getAdjacentScoreBelowOrRight($placedColor, $pattern);
 
         $score += $above + $below + $left + $right;
         if (($above || $below) && ($left || $right)) {//tile in intersection

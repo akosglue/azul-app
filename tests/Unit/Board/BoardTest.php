@@ -65,6 +65,27 @@ test('testDiscardTiles_RowsFull_AllTilesDiscarded', function () {
     $tiles = $board->discardTiles();
     $this->assertCount(10, $tiles);
     $this->assertEquals(5, $board->getScore()); //each row was full
+
+    //add second color to 2nd row
+    $board->placeTiles(buildCyanTiles(2), Board::ROW_2);
+    $board->doWallTiling();
+    $tiles = $board->discardTiles();
+    $this->assertCount(1, $tiles);
+    $this->assertEquals(9, $board->getScore());
+
+    //add more color to 1st row
+    $board->placeTiles(buildYellowTiles(1), Board::ROW_1);
+    $board->doWallTiling();
+    $tiles = $board->discardTiles();
+    $this->assertCount(0, $tiles);
+    $this->assertEquals(13, $board->getScore());
+
+    //add one color to 3rd row
+    $board->placeTiles(buildBlackTiles(3), Board::ROW_3);
+    $board->doWallTiling();
+    $tiles = $board->discardTiles();
+    $this->assertCount(2, $tiles);
+    $this->assertEquals(16, $board->getScore());
 });
 
 test('testDiscardTiles_EmptyRows_NothingDiscarded', function () {
@@ -100,4 +121,62 @@ test('testDiscardTiles_2Row2Tile_1TileDiscarded1OnWall', function () {
     $this->assertCount(1, $tiles);
     $this->assertEquals(0, $board->getRowTilesCount($rowNumber));
     $this->assertEquals(1, $board->getScore()); // one full row
+});
+
+test('testCorrect_Scoring_After_Multiple_Tiling', function () {
+    $board = new Board;
+    $board->placeTiles(buildBlueTiles(1), Board::ROW_1);
+    $board->placeTiles(buildBlueTiles(2), Board::ROW_2);
+    $board->placeTiles(buildBlueTiles(3), Board::ROW_3);
+    $board->placeTiles(buildBlueTiles(4), Board::ROW_4);
+    $board->placeTiles(buildBlueTiles(5), Board::ROW_5);
+
+    $board->doWallTiling();
+    $tiles = $board->discardTiles();
+    $this->assertCount(10, $tiles);
+    $this->assertEquals(5, $board->getScore()); //each row was full
+
+    //second color
+    $board->placeTiles(buildRedTiles(1), Board::ROW_1);
+    $board->placeTiles(buildRedTiles(2), Board::ROW_2);
+    $board->placeTiles(buildRedTiles(3), Board::ROW_3);
+    $board->placeTiles(buildRedTiles(4), Board::ROW_4);
+    $board->placeTiles(buildRedTiles(5), Board::ROW_5);
+    $board->doWallTiling();
+    $tiles = $board->discardTiles();
+    $this->assertCount(10, $tiles);
+    $this->assertEquals(10, $board->getScore()); //each row was full, nowhere multiscores
+
+    //add third color
+    $board->placeTiles(buildCyanTiles(1), Board::ROW_1);
+    $board->placeTiles(buildCyanTiles(2), Board::ROW_2);
+    $board->placeTiles(buildCyanTiles(3), Board::ROW_3);
+    $board->placeTiles(buildCyanTiles(4), Board::ROW_4);
+    $board->placeTiles(buildCyanTiles(5), Board::ROW_5);
+    $board->doWallTiling();
+    $tiles = $board->discardTiles();
+    $this->assertCount(10, $tiles);
+    $this->assertEquals(27, $board->getScore());
+
+    //add 4th color
+    $board->placeTiles(buildYellowTiles(1), Board::ROW_1);
+    $board->placeTiles(buildYellowTiles(2), Board::ROW_2);
+    $board->placeTiles(buildYellowTiles(3), Board::ROW_3);
+    $board->placeTiles(buildYellowTiles(4), Board::ROW_4);
+    $board->placeTiles(buildYellowTiles(5), Board::ROW_5);
+    $board->doWallTiling();
+    $tiles = $board->discardTiles();
+    $this->assertCount(10, $tiles);
+    $this->assertEquals(59, $board->getScore());
+
+    //add last color
+    $board->placeTiles(buildBlackTiles(1), Board::ROW_1);
+    $board->placeTiles(buildBlackTiles(2), Board::ROW_2);
+    $board->placeTiles(buildBlackTiles(3), Board::ROW_3);
+    $board->placeTiles(buildBlackTiles(4), Board::ROW_4);
+    $board->placeTiles(buildBlackTiles(5), Board::ROW_5);
+    $board->doWallTiling();
+    $tiles = $board->discardTiles();
+    $this->assertCount(10, $tiles);
+    $this->assertEquals(109, $board->getScore()); //full table
 });

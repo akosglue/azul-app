@@ -16,7 +16,13 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class ConsoleReporter
 {
-    private const EMPTY_SLOT_SIGN = '🖤';
+    private const EMPTY_SLOT_SIGNS = [
+        Color::BLACK => '🖤',
+        Color::BLUE => '💙',
+        Color::YELLOW => '💛',
+        Color::CYAN => '💚',
+        Color::RED => '❤️',
+    ];
 
     private const SECONDS_PAUSE_BETWEEN_MOVES = 100000;
 
@@ -86,7 +92,7 @@ class ConsoleReporter
             $this->drawTable($this->round->getTable());
         }
         $this->drawPlayers();
-        $this->writeln(str_repeat('_', 35).++$roundCount.str_repeat('_', 35));
+        $this->writeln(str_repeat('_', 49).++$roundCount.str_repeat('_', 49));
         $this->wait();
     }
 
@@ -171,11 +177,11 @@ class ConsoleReporter
                 }
                 $this->write(' | ');
                 // wall
-                foreach ($player->getBoard()->getPattern($row) as $tile) {
+                foreach ($player->getBoard()->getPattern($row) as $k => $tile) {
                     if ($tile) {
                         $this->drawTile($tile);
                     } else {
-                        $this->write(self::EMPTY_SLOT_SIGN);
+                        $this->drawWallTile(self::EMPTY_SLOT_SIGNS[$k]);
                     }
                 }
 
@@ -201,10 +207,19 @@ class ConsoleReporter
             $this->write("\t\t\t");
         }
         $this->writeln('');
+
+        $this->writeln(str_repeat('_', 45).'<info>round end</info>'.str_repeat('_', 45));
+        $this->writeln('');
+        $this->writeln('');
     }
 
     private function wait(): void
     {
         usleep(self::SECONDS_PAUSE_BETWEEN_MOVES);
+    }
+
+    private function drawWallTile($tile)
+    {
+        $this->write($tile);
     }
 }

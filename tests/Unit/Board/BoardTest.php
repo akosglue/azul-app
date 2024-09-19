@@ -1,6 +1,7 @@
 <?php
 
 use App\Board\Board;
+use App\Player\Player;
 use App\Tile\Color;
 use App\Tile\Tile;
 use App\Tile\TileCollection;
@@ -107,6 +108,10 @@ test('testDiscardTiles_2Row1Tile_NothingDiscarded', function () {
     $tiles = $board->discardTiles();
     $this->assertCount(0, $tiles);
     $this->assertEquals(1, $board->getRowTilesCount($rowNumber));
+
+    $player = new Player($board);
+    $this->assertFalse($player->isGameOver());
+
     $this->assertEquals(0, $board->getScore()); // no full row
 });
 
@@ -120,6 +125,10 @@ test('testDiscardTiles_2Row2Tile_1TileDiscarded1OnWall', function () {
     $tiles = $board->discardTiles();
     $this->assertCount(1, $tiles);
     $this->assertEquals(0, $board->getRowTilesCount($rowNumber));
+
+    $player = new Player($board);
+    $this->assertFalse($player->isGameOver());
+
     $this->assertEquals(1, $board->getScore()); // one full row
 });
 
@@ -179,4 +188,8 @@ test('testCorrect_Scoring_After_Multiple_Tiling', function () {
     $tiles = $board->discardTiles();
     $this->assertCount(10, $tiles);
     $this->assertEquals(109, $board->getScore()); //full table
+
+    $player = new Player($board);
+    $this->assertTrue($player->isGameOver());
+    $this->assertEquals(109 + (5 * 2) + (5 * 7) + (5 * 10), $board->getScore()); //with bonuses
 });

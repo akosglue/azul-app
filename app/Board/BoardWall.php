@@ -6,6 +6,7 @@ namespace App\Board;
 
 use App\Board\Exception\BoardWallColorAlreadyFilledException;
 use App\Tile\Color;
+use Webmozart\Assert\Assert;
 
 class BoardWall
 {
@@ -76,6 +77,52 @@ class BoardWall
         }
 
         return false;
+    }
+
+    public function countCompletedRow(): int
+    {
+        $completed = 0;
+
+        foreach ($this->pattern as $tiles) {
+            if (! in_array(null, $tiles, true)) {
+                $completed++;
+            }
+        }
+
+        Assert::range($completed, 0, 5);
+
+        return $completed;
+    }
+
+    public function countCompletedColumn(): int
+    {
+        $completed = 0;
+
+        for ($i = 0; $i < 5; $i++) {
+            $column = $this->getColumn($i);
+            if (count(array_filter($column)) == 5) {
+                $completed++;
+            }
+        }
+
+        Assert::range($completed, 0, 5);
+
+        return $completed;
+    }
+
+    public function countCompletedColors(): int
+    {
+        $completed = 0;
+        foreach (Color::getAll() as $color) {
+            $colors = array_column($this->pattern, $color);
+            if (count(array_filter($colors)) == 5) {
+                $completed++;
+            }
+        }
+
+        Assert::range($completed, 0, 5);
+
+        return $completed;
     }
 
     public function isColorFilled(string $color, int $rowNumber): bool

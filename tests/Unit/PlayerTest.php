@@ -81,4 +81,5 @@ test('testIsGameOver_HasEmptyColors_False', function () {
             $this->assertFalse($player->isGameOver());
         }
     }
+    $this->assertEquals(2, $board->getScore()); //1 full first row
 });

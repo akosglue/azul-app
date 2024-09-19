@@ -158,6 +158,10 @@ class Board
 
     public function isAnyWallRowCompleted(): bool
     {
+        if ($this->wall->isAnyRowCompleted()) {
+            $this->score += $this->calculateBonuses();
+        }
+
         return $this->wall->isAnyRowCompleted();
     }
 
@@ -193,6 +197,20 @@ class Board
             $penalty = ($c <= 1) ? -1 : ($c <= 4 ? -2 : -3);
             $score += $penalty;
         }
+
+        return $score;
+    }
+
+    private function calculateBonuses(): int
+    {
+        $score = 0;
+        //full row: 2
+        //full column: 7
+        //5 colors: 10
+
+        $score += $this->wall->countCompletedRow() * 2;
+        $score += $this->wall->countCompletedColumn() * 7;
+        $score += $this->wall->countCompletedColors() * 10;
 
         return $score;
     }

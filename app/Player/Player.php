@@ -66,7 +66,7 @@ class Player
         $this->board->placeTiles($tiles, $rowNumber);
     }
 
-    public function getScore()
+    public function getScore(): int
     {
         return $this->board->getScore();
     }

@@ -13,6 +13,9 @@ class Factory implements ITileStorage
 
     public function __construct(TileCollection $tiles)
     {
+        foreach ($tiles as $tile) {
+            Assert::notEmpty($tile->getColor());
+        }
         $this->tiles = $tiles;
     }
 

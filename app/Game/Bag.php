@@ -7,6 +7,7 @@ namespace App\Game;
 use App\Tile\Color;
 use App\Tile\Tile;
 use App\Tile\TileCollection;
+use Webmozart\Assert\Assert;
 
 class Bag
 {
@@ -26,6 +27,9 @@ class Bag
 
     public function getNextPlate(): TileCollection
     {
+        foreach ($this->tiles as $k => $tile) {
+            Assert::notEmpty($k);
+        }
         $plateTiles = new TileCollection;
         // TODO check rules - if there are 3 left in bag - game stops?
         if (array_sum($this->tiles) + array_sum($this->discardTiles) >= 4) {
@@ -54,6 +58,9 @@ class Bag
     {
         foreach ($tiles as $tile) {
             $color = $tile->getColor();
+            if (! $color) {//marker tile wont be discarded
+                continue;
+            }
             $this->discardTiles[$color] = ($this->discardTiles[$color] ?? 0) + 1;
         }
     }

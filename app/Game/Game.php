@@ -60,8 +60,10 @@ class Game
                     $player->doWallTiling();
                     $this->dispatch(new WallTiledEvent($player));
                     $this->bag->discardTiles($player->discardTiles());
+                }
+
+                foreach ($players as $player) {
                     if ($player->isGameOver()) {
-                        // TODO rework game cycle, round could end at each turn, game over on each turn
                         return;
                     }
                 }

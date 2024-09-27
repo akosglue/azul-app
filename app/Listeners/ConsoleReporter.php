@@ -177,12 +177,17 @@ class ConsoleReporter
                 }
                 $this->write(' | ');
                 // wall
+                $filled = 0;
                 foreach ($player->getBoard()->getPattern($row) as $k => $tile) {
                     if ($tile) {
+                        $filled++;
                         $this->drawTile($tile);
                     } else {
                         $this->drawWallTile(self::EMPTY_SLOT_SIGNS[$k]);
                     }
+                }
+                if ($filled == 5) {
+                    $this->write(':)');
                 }
 
                 $this->write("\t\t\t\t");

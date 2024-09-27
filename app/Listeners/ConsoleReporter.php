@@ -79,7 +79,7 @@ class ConsoleReporter
 
     public function onWallTiled(WallTiledEvent $event): void
     {
-        $this->writeln("\nWALL TILING\n");
+        $this->writeln(PHP_EOL.'WALL TILING - '.$event->getPlayer()->getName().PHP_EOL);
         $this->setPlayer($event->getPlayer());
         $this->drawReport();
     }

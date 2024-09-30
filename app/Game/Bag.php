@@ -71,4 +71,9 @@ class Bag
 
         return $this;
     }
+
+    public function getDiscardTileCountForColor($color): int
+    {
+        return $this->discardTiles[$color];
+    }
 }

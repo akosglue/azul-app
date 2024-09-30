@@ -32,7 +32,7 @@ class Bag
         }
         $plateTiles = new TileCollection;
         // TODO check rules - if there are 3 left in bag - game stops?
-        if (array_sum($this->tiles) + array_sum($this->discardTiles) >= 4) {
+        if (array_sum($this->tiles) + array_sum($this->discardTiles) >= 4) {// @pest-mutate-ignore
             while ($plateTiles->count() !== 4) {
                 $availableColors = array_keys(array_filter(
                     $this->tiles,
@@ -44,8 +44,8 @@ class Bag
 
                     continue;
                 }
-                shuffle($availableColors);
-                $randomColor = array_pop($availableColors);
+                shuffle($availableColors); // @pest-mutate-ignore
+                $randomColor = array_pop($availableColors); // @pest-mutate-ignore
                 $this->tiles[$randomColor]--;
                 $plateTiles->push(new Tile($randomColor));
             }
@@ -67,7 +67,11 @@ class Bag
 
     public function addTiles(string $color, int $amount): self
     {
-        $this->tiles[$color] = ($this->tiles[$color] ?? 0) + $amount;
+        if (! array_key_exists($color, $this->tiles)) {
+            $this->tiles[$color] = 0;
+        }
+
+        $this->tiles[$color] += $amount;
 
         return $this;
     }
@@ -75,5 +79,10 @@ class Bag
     public function getDiscardTileCountForColor($color): int
     {
         return $this->discardTiles[$color];
+    }
+
+    public function geTileCountForColor($color): int
+    {
+        return $this->tiles[$color];
     }
 }

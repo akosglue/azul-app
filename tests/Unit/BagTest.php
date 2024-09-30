@@ -5,6 +5,8 @@ use App\Tile\Color;
 use App\Tile\Tile;
 use App\Tile\TileCollection;
 
+mutates(Bag::class);
+
 test('testGetNext_NoTiles_NoNext', function () {
     $bag = new Bag;
     $this->assertEmpty($bag->getNextPlate());
@@ -49,4 +51,57 @@ test('testNextPlate_HasRedInTilesAndBlackInDiscard_UseDiscardedOnlyAfterTilesEmp
     foreach ($nextPlate as $tile) {
         $this->assertNotEquals($tileColor, $tile->getColor());
     }
+});
+
+test('exception with empty tile', function () {
+    $this->expectException(\Webmozart\Assert\InvalidArgumentException::class);
+    $bag = (new Bag)->addTiles('', 4);
+    $bag->getNextPlate();
+});
+
+test('discard without empty tiles', function () {
+    $bag = (new Bag)->addTiles(Color::RED, 4);
+    $bag->discardTiles(new TileCollection([
+        new Tile(Color::RED),
+        new Tile(Color::RED),
+        new Tile(Color::RED),
+        new Tile(Color::RED),
+    ]));
+    $this->assertCount(4, $bag->getNextPlate());
+    $this->assertEquals(4, $bag->getDiscardTileCountForColor(Color::RED));
+});
+
+test('discard with empty tile as first', function () {
+    $bag = (new Bag)->addTiles(Color::RED, 4);
+    $bag->discardTiles(new TileCollection([
+        new Tile(''),
+        new Tile(Color::RED),
+        new Tile(Color::RED),
+        new Tile(Color::RED),
+    ]));
+    $this->assertCount(4, $bag->getNextPlate());
+    $this->assertEquals(3, $bag->getDiscardTileCountForColor(Color::RED));
+});
+
+test('discard with one empty tile as not first', function () {
+    $bag = (new Bag)->addTiles(Color::RED, 4);
+    $bag->discardTiles(new TileCollection([
+        new Tile(Color::RED),
+        new Tile(Color::RED),
+        new Tile(''),
+        new Tile(Color::RED),
+        new Tile(Color::RED),
+    ]));
+    $this->assertCount(4, $bag->getNextPlate());
+    $this->assertEquals(4, $bag->getDiscardTileCountForColor(Color::RED));
+});
+
+test('correct color counter', function () {
+    $bag = (new Bag)->addTiles(Color::RED, 4);
+    $bag->addTiles(Color::BLUE, 2);
+    $bag->addTiles(Color::YELLOW, 1);
+    $bag->addTiles(Color::RED, 1);
+    $this->assertEquals(5, $bag->geTileCountForColor(Color::RED));
+    $this->assertEquals(2, $bag->geTileCountForColor(Color::BLUE));
+    $this->assertEquals(1, $bag->geTileCountForColor(Color::YELLOW));
 });

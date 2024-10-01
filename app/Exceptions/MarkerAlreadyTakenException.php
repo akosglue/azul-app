@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Game\Exception;
+namespace App\Exceptions;
 
 class MarkerAlreadyTakenException extends \Exception
 {

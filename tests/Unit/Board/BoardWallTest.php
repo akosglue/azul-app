@@ -3,7 +3,7 @@
 use App\Board\Board;
 use App\Board\BoardRow;
 use App\Board\BoardWall;
-use App\Board\Exception\BoardWallColorAlreadyFilledException;
+use App\Exceptions\BoardWallColorAlreadyFilledException;
 use App\Tile\Color;
 use App\Tile\Tile;
 

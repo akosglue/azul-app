@@ -1,6 +1,6 @@
 <?php
 
-use App\Game\Exception\MarkerAlreadyTakenException;
+use App\Exceptions\MarkerAlreadyTakenException;
 use App\Tile\Color;
 use App\Tile\Tile;
 use App\Tile\TileCollection;

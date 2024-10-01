@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Board;
 
-use App\Board\Exception\BoardWallColorAlreadyFilledException;
+use App\Exceptions\BoardWallColorAlreadyFilledException;
 use App\Tile\Color;
 use Webmozart\Assert\Assert;
 

@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Board;
 
-use App\Board\Exception\BoardRowSizeExceededException;
-use App\Board\Exception\BoardRowVariousColorsException;
+use App\Exceptions\BoardRowSizeExceededException;
+use App\Exceptions\BoardRowVariousColorsException;
 use App\Tile\Tile;
 use App\Tile\TileCollection;
 use Webmozart\Assert\Assert;

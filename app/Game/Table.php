@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Game;
 
-use App\Game\Exception\MarkerAlreadyTakenException;
+use App\Exceptions\MarkerAlreadyTakenException;
 use App\Tile\Marker;
 use App\Tile\TileCollection;
 use Webmozart\Assert\Assert;

@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace App\Game;
 
+use App\Assert\Assert;
 use App\Tile\Color;
 use App\Tile\Tile;
 use App\Tile\TileCollection;
-use Webmozart\Assert\Assert;
 
 class Bag
 {

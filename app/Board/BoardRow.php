@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace App\Board;
 
+use App\Assert\Assert;
 use App\Exceptions\BoardRowSizeExceededException;
 use App\Exceptions\BoardRowVariousColorsException;
 use App\Tile\Tile;
 use App\Tile\TileCollection;
-use Webmozart\Assert\Assert;
 
 class BoardRow
 {

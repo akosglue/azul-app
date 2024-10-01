@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Game;
 
+use App\Assert\Assert;
 use App\Tile\TileCollection;
-use Webmozart\Assert\Assert;
 
 class Factory implements ITileStorage
 {

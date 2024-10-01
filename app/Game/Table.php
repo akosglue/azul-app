@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace App\Game;
 
+use App\Assert\Assert;
 use App\Exceptions\MarkerAlreadyTakenException;
 use App\Tile\Marker;
 use App\Tile\TileCollection;
-use Webmozart\Assert\Assert;
 
 class Table implements ITileStorage
 {

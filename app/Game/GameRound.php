@@ -4,13 +4,15 @@ declare(strict_types=1);
 
 namespace App\Game;
 
+use App\Player\PlayerCollection;
+
 class GameRound
 {
     private FactoryCollection $factories;
 
     private Table $table;
 
-    public function __construct(Table $table, array $factories)
+    public function __construct(Table $table, array $factories, PlayerCollection $players)
     {
         $this->table = $table;
         $this->factories = new FactoryCollection($factories);

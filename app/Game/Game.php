@@ -83,7 +83,8 @@ class Game
                 new Factory($this->bag->getNextPlate()),
                 new Factory($this->bag->getNextPlate()),
                 new Factory($this->bag->getNextPlate()),
-            ]
+            ],
+            $players
         );
     }
 

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Game;
 
 use App\Player\PlayerCollection;
+use Webmozart\Assert\Assert;
 
 class GameRound
 {
@@ -16,6 +17,7 @@ class GameRound
     {
         $this->table = $table;
         $this->factories = new FactoryCollection($factories);
+        Assert::countBetween($players, 2, 4);
     }
 
     public function canContinue(): bool

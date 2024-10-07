@@ -115,3 +115,62 @@ test('cannot take from empty factory', function () {
     $f->take(Color::CYAN);
     $this->assertFalse($round->canContinue());
 });
+
+test('no exception with correct num of players', function ($players) {
+    $t = createGameTable();
+    $round = new GameRound($t,
+        [
+            $f = new Factory(
+                new TileCollection([
+
+                ])
+            ),
+        ],
+        $players
+    );
+})->with([
+    new PlayerCollection([
+        new Player(new Board, 'Ivan1'),
+        new Player(new Board, 'Ivan2'),
+    ]),
+    new PlayerCollection([
+        new Player(new Board, 'Ivan1'),
+        new Player(new Board, 'Ivan2'),
+        new Player(new Board, 'Ivan3'),
+    ]),
+    new PlayerCollection([
+        new Player(new Board, 'Ivan1'),
+        new Player(new Board, 'Ivan2'),
+        new Player(new Board, 'Ivan3'),
+        new Player(new Board, 'Ivan4'),
+    ]),
+])->throwsNoExceptions();
+
+test('exception with incorrect num of players', function ($players) {
+    $this->expectException(Webmozart\Assert\InvalidArgumentException::class);
+    $t = createGameTable();
+    $round = new GameRound($t,
+        [
+            $f = new Factory(
+                new TileCollection([
+
+                ])
+            ),
+        ],
+        $players
+    );
+})->with([
+    new PlayerCollection([
+
+    ]),
+    new PlayerCollection([
+        new Player(new Board, 'Ivan'),
+    ]),
+    new PlayerCollection([
+        new Player(new Board, 'Ivan1'),
+        new Player(new Board, 'Ivan2'),
+        new Player(new Board, 'Ivan3'),
+        new Player(new Board, 'Ivan4'),
+        new Player(new Board, 'Ivan5'),
+    ]),
+]);

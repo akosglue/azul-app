@@ -13,15 +13,23 @@ use Webmozart\Assert\InvalidArgumentException;
 mutates(GameRound::class);
 
 test('testKeepPlaying_EmptyFactoriesAndTable_False', function () {
-    $t = createGameTable();
+    $table = createGameTable();
     $players = new PlayerCollection([
         new Player(new Board, 'Ivan'),
         new Player(new Board, 'Petr'),
     ]);
-    $t->addToCenterPile(new TileCollection([new Tile(Color::YELLOW)]));
-    $round = new GameRound($t,
+    $table->addToCenterPile(new TileCollection([new Tile(Color::YELLOW)]));
+    $round = new GameRound($table,
         [
-            $f = new Factory(
+            $factory1 = new Factory(
+                new TileCollection([
+                    new Tile(Color::YELLOW),
+                    new Tile(Color::YELLOW),
+                    new Tile(Color::YELLOW),
+                    new Tile(Color::YELLOW),
+                ])
+            ),
+            $factory2 = new Factory(
                 new TileCollection([
                     new Tile(Color::CYAN),
                     new Tile(Color::CYAN),
@@ -29,17 +37,56 @@ test('testKeepPlaying_EmptyFactoriesAndTable_False', function () {
                     new Tile(Color::CYAN),
                 ])
             ),
+            $factory3 = new Factory(
+                new TileCollection([
+                    new Tile(Color::RED),
+                    new Tile(Color::RED),
+                    new Tile(Color::RED),
+                    new Tile(Color::RED),
+                ])
+            ),
+            $factory4 = new Factory(
+                new TileCollection([
+                    new Tile(Color::BLUE),
+                    new Tile(Color::BLUE),
+                    new Tile(Color::BLUE),
+                    new Tile(Color::BLUE),
+                ])
+            ),
+            $factory5 = new Factory(
+                new TileCollection([
+                    new Tile(Color::BLACK),
+                    new Tile(Color::BLACK),
+                    new Tile(Color::BLACK),
+                    new Tile(Color::BLACK),
+                ])
+            ),
         ],
         $players
     );
     $this->assertTrue($round->canContinue());
-    $f->take(Color::CYAN);
+
+    $table->take(Color::YELLOW);
     $this->assertTrue($round->canContinue());
-    $t->take(Color::YELLOW);
+
+    $factory1->take(Color::YELLOW);
+    $this->assertTrue($round->canContinue());
+
+    $factory2->take(Color::CYAN);
+    $this->assertTrue($round->canContinue());
+
+    $factory3->take(Color::RED);
+    $this->assertTrue($round->canContinue());
+
+    $factory4->take(Color::BLUE);
+    $this->assertTrue($round->canContinue());
+
+    $factory5->take(Color::BLACK);
+
     $this->assertFalse($round->canContinue());
 });
 
-test('multiple factory contents', function ($f) {
+test('multiple factory contents', function ($f1, $f2, $f3, $f4, $f5, $f6, $f7) {
     $t = createGameTable();
     $players = new PlayerCollection([
         new Player(new Board, 'Ivan'),
@@ -47,50 +94,288 @@ test('multiple factory contents', function ($f) {
         new Player(new Board, 'Jonas'),
     ]);
     $round = new GameRound($t,
-        [
-            $f,
-        ],
+        [$f1, $f2, $f3, $f4, $f5, $f6, $f7],
         $players
     );
     $this->assertTrue($round->canContinue());
-    $f->take(Color::CYAN);
+
+    $f1->take(Color::CYAN);
+    $this->assertTrue($round->canContinue());
+
+    $f2->take(Color::CYAN);
+    $this->assertTrue($round->canContinue());
+
+    $f3->take(Color::CYAN);
+    $this->assertTrue($round->canContinue());
+
+    $f4->take(Color::CYAN);
+    $this->assertTrue($round->canContinue());
+
+    $f5->take(Color::CYAN);
+    $this->assertTrue($round->canContinue());
+
+    $f6->take(Color::CYAN);
+    $this->assertTrue($round->canContinue());
+
+    $f7->take(Color::CYAN);
+
     $this->assertFalse($round->canContinue());
 })->with([
-    new Factory(
-        new TileCollection([
-            new Tile(Color::CYAN),
-            new Tile(Color::CYAN),
-            new Tile(Color::CYAN),
-            new Tile(Color::CYAN),
-            new Tile(Color::CYAN),
-        ])
-    ),
-    new Factory(
-        new TileCollection([
-            new Tile(Color::CYAN),
-            new Tile(Color::CYAN),
-            new Tile(Color::CYAN),
-            new Tile(Color::CYAN),
-        ])
-    ),
-    new Factory(
-        new TileCollection([
-            new Tile(Color::CYAN),
-            new Tile(Color::CYAN),
-            new Tile(Color::CYAN),
-        ])
-    ),
-    new Factory(
-        new TileCollection([
-            new Tile(Color::CYAN),
-            new Tile(Color::CYAN),
-        ])
-    ),
-    new Factory(
-        new TileCollection([
-            new Tile(Color::CYAN),
-        ])
-    ),
+    'five tiles' => [
+        new Factory(
+            new TileCollection([
+                new Tile(Color::CYAN),
+                new Tile(Color::CYAN),
+                new Tile(Color::CYAN),
+                new Tile(Color::CYAN),
+                new Tile(Color::CYAN),
+            ])
+        ),
+        new Factory(
+            new TileCollection([
+                new Tile(Color::CYAN),
+                new Tile(Color::CYAN),
+                new Tile(Color::CYAN),
+                new Tile(Color::CYAN),
+                new Tile(Color::CYAN),
+            ])
+        ),
+        new Factory(
+            new TileCollection([
+                new Tile(Color::CYAN),
+                new Tile(Color::CYAN),
+                new Tile(Color::CYAN),
+                new Tile(Color::CYAN),
+                new Tile(Color::CYAN),
+            ])
+        ),
+        new Factory(
+            new TileCollection([
+                new Tile(Color::CYAN),
+                new Tile(Color::CYAN),
+                new Tile(Color::CYAN),
+                new Tile(Color::CYAN),
+                new Tile(Color::CYAN),
+            ])
+        ),
+        new Factory(
+            new TileCollection([
+                new Tile(Color::CYAN),
+                new Tile(Color::CYAN),
+                new Tile(Color::CYAN),
+                new Tile(Color::CYAN),
+                new Tile(Color::CYAN),
+            ])
+        ),
+        new Factory(
+            new TileCollection([
+                new Tile(Color::CYAN),
+                new Tile(Color::CYAN),
+                new Tile(Color::CYAN),
+                new Tile(Color::CYAN),
+                new Tile(Color::CYAN),
+            ])
+        ),
+        new Factory(
+            new TileCollection([
+                new Tile(Color::CYAN),
+                new Tile(Color::CYAN),
+                new Tile(Color::CYAN),
+                new Tile(Color::CYAN),
+                new Tile(Color::CYAN),
+            ])
+        ),
+    ],
+    'four tiles' => [
+        new Factory(
+            new TileCollection([
+                new Tile(Color::CYAN),
+                new Tile(Color::CYAN),
+                new Tile(Color::CYAN),
+                new Tile(Color::CYAN),
+            ])
+        ),
+        new Factory(
+            new TileCollection([
+                new Tile(Color::CYAN),
+                new Tile(Color::CYAN),
+                new Tile(Color::CYAN),
+                new Tile(Color::CYAN),
+            ])
+        ),
+        new Factory(
+            new TileCollection([
+                new Tile(Color::CYAN),
+                new Tile(Color::CYAN),
+                new Tile(Color::CYAN),
+                new Tile(Color::CYAN),
+            ])
+        ),
+        new Factory(
+            new TileCollection([
+                new Tile(Color::CYAN),
+                new Tile(Color::CYAN),
+                new Tile(Color::CYAN),
+                new Tile(Color::CYAN),
+            ])
+        ),
+        new Factory(
+            new TileCollection([
+                new Tile(Color::CYAN),
+                new Tile(Color::CYAN),
+                new Tile(Color::CYAN),
+                new Tile(Color::CYAN),
+            ])
+        ),
+        new Factory(
+            new TileCollection([
+                new Tile(Color::CYAN),
+                new Tile(Color::CYAN),
+                new Tile(Color::CYAN),
+                new Tile(Color::CYAN),
+            ])
+        ),
+        new Factory(
+            new TileCollection([
+                new Tile(Color::CYAN),
+                new Tile(Color::CYAN),
+                new Tile(Color::CYAN),
+                new Tile(Color::CYAN),
+            ])
+        ),
+    ],
+    'three tiles' => [
+        new Factory(
+            new TileCollection([
+                new Tile(Color::CYAN),
+                new Tile(Color::CYAN),
+                new Tile(Color::CYAN),
+            ])
+        ),
+        new Factory(
+            new TileCollection([
+                new Tile(Color::CYAN),
+                new Tile(Color::CYAN),
+                new Tile(Color::CYAN),
+            ])
+        ),
+        new Factory(
+            new TileCollection([
+                new Tile(Color::CYAN),
+                new Tile(Color::CYAN),
+                new Tile(Color::CYAN),
+            ])
+        ),
+        new Factory(
+            new TileCollection([
+                new Tile(Color::CYAN),
+                new Tile(Color::CYAN),
+                new Tile(Color::CYAN),
+            ])
+        ),
+        new Factory(
+            new TileCollection([
+                new Tile(Color::CYAN),
+                new Tile(Color::CYAN),
+                new Tile(Color::CYAN),
+            ])
+        ),
+        new Factory(
+            new TileCollection([
+                new Tile(Color::CYAN),
+                new Tile(Color::CYAN),
+                new Tile(Color::CYAN),
+            ])
+        ),
+        new Factory(
+            new TileCollection([
+                new Tile(Color::CYAN),
+                new Tile(Color::CYAN),
+                new Tile(Color::CYAN),
+            ])
+        ),
+    ],
+    'two tiles' => [
+        new Factory(
+            new TileCollection([
+                new Tile(Color::CYAN),
+                new Tile(Color::CYAN),
+            ])
+        ),
+        new Factory(
+            new TileCollection([
+                new Tile(Color::CYAN),
+                new Tile(Color::CYAN),
+            ])
+        ),
+        new Factory(
+            new TileCollection([
+                new Tile(Color::CYAN),
+                new Tile(Color::CYAN),
+            ])
+        ),
+        new Factory(
+            new TileCollection([
+                new Tile(Color::CYAN),
+                new Tile(Color::CYAN),
+            ])
+        ),
+        new Factory(
+            new TileCollection([
+                new Tile(Color::CYAN),
+                new Tile(Color::CYAN),
+            ])
+        ),
+        new Factory(
+            new TileCollection([
+                new Tile(Color::CYAN),
+                new Tile(Color::CYAN),
+            ])
+        ),
+        new Factory(
+            new TileCollection([
+                new Tile(Color::CYAN),
+                new Tile(Color::CYAN),
+            ])
+        ),
+    ],
+    'one tile' => [
+        new Factory(
+            new TileCollection([
+                new Tile(Color::CYAN),
+            ])
+        ),
+        new Factory(
+            new TileCollection([
+                new Tile(Color::CYAN),
+            ])
+        ),
+        new Factory(
+            new TileCollection([
+                new Tile(Color::CYAN),
+            ])
+        ),
+        new Factory(
+            new TileCollection([
+                new Tile(Color::CYAN),
+            ])
+        ),
+        new Factory(
+            new TileCollection([
+                new Tile(Color::CYAN),
+            ])
+        ),
+        new Factory(
+            new TileCollection([
+                new Tile(Color::CYAN),
+            ])
+        ),
+        new Factory(
+            new TileCollection([
+                new Tile(Color::CYAN),
+            ])
+        ),
+    ],
 ]);
 
 test('cannot take from empty factory', function () {
@@ -119,27 +404,82 @@ test('cannot take from empty factory', function () {
 
 test('no exception with correct num of players', function ($players) {
     $t = createGameTable();
-    $round = new GameRound($t,
-        [
-            $f = new Factory(
-                new TileCollection([
+    $factories = [
+        new Factory(
+            new TileCollection([
 
-                ])
-            ),
-        ],
+            ])
+        ),
+        new Factory(
+            new TileCollection([
+
+            ])
+        ),
+        new Factory(
+            new TileCollection([
+
+            ])
+        ),
+        new Factory(
+            new TileCollection([
+
+            ])
+        ),
+        new Factory(
+            new TileCollection([
+
+            ])
+        ),
+    ];
+    if (count($players) == 3) {
+        $factories[] = new Factory(
+            new TileCollection([
+
+            ])
+        );
+        $factories[] = new Factory(
+            new TileCollection([
+
+            ])
+        );
+    }
+    if (count($players) == 4) {
+        $factories[] = new Factory(
+            new TileCollection([
+
+            ])
+        );
+        $factories[] = new Factory(
+            new TileCollection([
+
+            ])
+        );
+        $factories[] = new Factory(
+            new TileCollection([
+
+            ])
+        );
+        $factories[] = new Factory(
+            new TileCollection([
+
+            ])
+        );
+    }
+    $round = new GameRound($t,
+        $factories,
         $players
     );
 })->with([
-    new PlayerCollection([
+    '2 players' => new PlayerCollection([
         new Player(new Board, 'Ivan1'),
         new Player(new Board, 'Ivan2'),
     ]),
-    new PlayerCollection([
+    '3 players' => new PlayerCollection([
         new Player(new Board, 'Ivan1'),
         new Player(new Board, 'Ivan2'),
         new Player(new Board, 'Ivan3'),
     ]),
-    new PlayerCollection([
+    '4 players' => new PlayerCollection([
         new Player(new Board, 'Ivan1'),
         new Player(new Board, 'Ivan2'),
         new Player(new Board, 'Ivan3'),
@@ -161,13 +501,13 @@ test('exception with incorrect num of players', function ($players) {
         $players
     );
 })->with([
-    new PlayerCollection([
+    'no players' => new PlayerCollection([
 
     ]),
-    new PlayerCollection([
+    'one player' => new PlayerCollection([
         new Player(new Board, 'Ivan'),
     ]),
-    new PlayerCollection([
+    'five players' => new PlayerCollection([
         new Player(new Board, 'Ivan1'),
         new Player(new Board, 'Ivan2'),
         new Player(new Board, 'Ivan3'),

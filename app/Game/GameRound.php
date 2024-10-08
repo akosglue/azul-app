@@ -18,6 +18,15 @@ class GameRound
         $this->table = $table;
         $this->factories = new FactoryCollection($factories);
         Assert::countBetween($players, 2, 4);
+        if (count($players) === 2) {
+            Assert::count($factories, 5);
+        }
+        if (count($players) === 3) {
+            Assert::count($factories, 7);
+        }
+        if (count($players) === 4) {
+            Assert::count($factories, 9);
+        }
     }
 
     public function canContinue(): bool

@@ -8,6 +8,7 @@ use App\Player\PlayerCollection;
 use App\Tile\Color;
 use App\Tile\Tile;
 use App\Tile\TileCollection;
+use Webmozart\Assert\InvalidArgumentException;
 
 mutates(GameRound::class);
 
@@ -17,7 +18,7 @@ test('testKeepPlaying_EmptyFactoriesAndTable_False', function () {
         new Player(new Board, 'Ivan'),
         new Player(new Board, 'Petr'),
     ]);
-    $t->addToCenterPile(new TileCollection([new App\Tile\Tile(Color::YELLOW)]));
+    $t->addToCenterPile(new TileCollection([new Tile(Color::YELLOW)]));
     $round = new GameRound($t,
         [
             $f = new Factory(
@@ -93,7 +94,7 @@ test('multiple factory contents', function ($f) {
 ]);
 
 test('cannot take from empty factory', function () {
-    $this->expectException(Webmozart\Assert\InvalidArgumentException::class);
+    $this->expectException(InvalidArgumentException::class);
     $t = createGameTable();
     $players = new PlayerCollection([
         new Player(new Board, 'Ivan'),
@@ -147,7 +148,7 @@ test('no exception with correct num of players', function ($players) {
 ])->throwsNoExceptions();
 
 test('exception with incorrect num of players', function ($players) {
-    $this->expectException(Webmozart\Assert\InvalidArgumentException::class);
+    $this->expectException(InvalidArgumentException::class);
     $t = createGameTable();
     $round = new GameRound($t,
         [

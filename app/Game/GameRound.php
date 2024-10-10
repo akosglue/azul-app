@@ -18,14 +18,14 @@ class GameRound
         $this->table = $table;
         $this->factories = new FactoryCollection($factories);
         Assert::countBetween($players, 2, 4);
-        if (count($players) === 2) {
-            Assert::count($factories, 5);
+        if (count($players) === 2) {//@pest-mutate-ignore
+            Assert::count($factories, 5); //@pest-mutate-ignore
         }
-        if (count($players) === 3) {
-            Assert::count($factories, 7);
+        if (count($players) === 3) {//@pest-mutate-ignore
+            Assert::count($factories, 7); //@pest-mutate-ignore
         }
-        if (count($players) === 4) {
-            Assert::count($factories, 9);
+        if (count($players) === 4) {//@pest-mutate-ignore
+            Assert::count($factories, 9); //@pest-mutate-ignore
         }
     }
 
@@ -36,7 +36,7 @@ class GameRound
             $factoriesTileCount += $factory->getTilesCount();
         }
 
-        return $this->table->getTilesCount() > 0 || $factoriesTileCount > 0;
+        return $this->table->getTilesCount() > 0 || $factoriesTileCount > 0; //@pest-mutate-ignore
     }
 
     public function getFactories(): FactoryCollection

@@ -11,8 +11,14 @@ use App\Tile\TileCollection;
 
 class Bag
 {
+    /**
+     * @var array<mixed>
+     */
     private array $tiles = [];
 
+    /**
+     * @var array<mixed>
+     */
     private array $discardTiles = [];
 
     public static function create(): self
@@ -76,12 +82,12 @@ class Bag
         return $this;
     }
 
-    public function getDiscardTileCountForColor($color): int
+    public function getDiscardTileCountForColor(string $color): int
     {
         return $this->discardTiles[$color];
     }
 
-    public function geTileCountForColor($color): int
+    public function geTileCountForColor(string $color): int
     {
         return $this->tiles[$color];
     }

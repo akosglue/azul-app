@@ -222,7 +222,7 @@ class ConsoleReporter
         usleep(self::SECONDS_PAUSE_BETWEEN_MOVES);
     }
 
-    private function drawWallTile($tile)
+    private function drawWallTile(string $tile): void
     {
         $this->write($tile);
     }

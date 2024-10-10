@@ -10,5 +10,7 @@ interface ITileStorage
 {
     public function take(string $color): TileCollection;
 
+    public function takeAll(): TileCollection;
+
     public function getTilesCount(?string $color = null): int;
 }

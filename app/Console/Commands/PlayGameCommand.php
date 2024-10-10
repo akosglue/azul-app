@@ -22,7 +22,7 @@ class PlayGameCommand extends Command
     /**
      * Execute the console command.
      */
-    public function handle(Dispatcher $dispatcher)
+    public function handle(Dispatcher $dispatcher): int
     {
         $this->info('Let\'s start!');
 

@@ -11,6 +11,9 @@ use App\Tile\TileCollection;
 
 class Table implements ITileStorage
 {
+    /**
+     * @var array<string,TileCollection>
+     */
     private array $centerPile = [];
 
     private ?Marker $marker;
@@ -53,6 +56,9 @@ class Table implements ITileStorage
         return $tiles;
     }
 
+    /**
+     * @return array<string,TileCollection>
+     */
     public function getCenterPileTiles(): array
     {
         return $this->centerPile;
@@ -78,5 +84,10 @@ class Table implements ITileStorage
         $this->marker = null;
 
         return $marker;
+    }
+
+    public function takeAll(): TileCollection
+    {
+        return new TileCollection;
     }
 }

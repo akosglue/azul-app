@@ -48,6 +48,9 @@ class BoardWall
         ],
     ];
 
+    /**
+     * @var array<mixed>
+     */
     private array $pattern;
 
     public function __construct()
@@ -135,12 +138,18 @@ class BoardWall
         return $this->isColorFilled($row->getMainColor(), $row->getRowNumber());
     }
 
+    /**
+     * @return array<mixed>
+     */
     public function getPattern(BoardRow $row): array
     {
         return $this->pattern[$row->getRowNumber()];
     }
 
-    public function getColumn($idx): array
+    /**
+     * @return array<mixed>
+     */
+    public function getColumn(int $idx): array
     {
         $colors = [];
         foreach (self::PATTERN as $rowNumber => $rowColors) {

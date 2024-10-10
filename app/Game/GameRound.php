@@ -13,6 +13,9 @@ class GameRound
 
     private Table $table;
 
+    /**
+     * @param  array<Factory>  $factories
+     */
     public function __construct(Table $table, array $factories, PlayerCollection $players)
     {
         $this->table = $table;

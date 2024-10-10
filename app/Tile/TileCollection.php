@@ -9,9 +9,14 @@ namespace App\Tile;
  * @method Tile bottom()
  * @method Tile top()
  */
+
+/** @extends \SplStack<Tile> */
 class TileCollection extends \SplStack
 {
-    public function __construct($tiles = [])
+    /**
+     * @param  array<mixed>|Tile  $tiles
+     */
+    public function __construct(array|Tile $tiles = [])
     {
         if ($tiles instanceof Tile) {
             $tiles = [$tiles];

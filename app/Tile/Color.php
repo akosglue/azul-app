@@ -16,6 +16,9 @@ class Color
 
     public const YELLOW = 'yellow';
 
+    /**
+     * @return string[]
+     */
     public static function getAll(): array
     {
         return [

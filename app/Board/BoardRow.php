@@ -78,6 +78,6 @@ class BoardRow
 
     public function getTileForWall(): ?Tile
     {
-        return $this->tiles ? $this->tiles->pop() : null;
+        return $this->getTilesCount() ? $this->tiles->pop() : null;
     }
 }

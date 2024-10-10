@@ -43,8 +43,6 @@ class ConsoleReporter
 
     /**
      * Register the listeners for the subscriber.
-     *
-     * @return void
      */
     public function subscribe(Dispatcher $events): void
     {

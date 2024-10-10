@@ -85,6 +85,7 @@ class Board
                 return $this->row4;
             case 5:
                 return $this->row5;
+            default: return $this->row1;
         }
     }
 

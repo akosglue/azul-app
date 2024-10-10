@@ -126,6 +126,7 @@ class ConsoleReporter
                 return '🟥';
             case Color::YELLOW:
                 return '🟨';
+            default: return '?';
         }
     }
 

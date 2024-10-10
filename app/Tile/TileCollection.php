@@ -34,8 +34,8 @@ class TileCollection extends \SplStack
     public function takeAllTiles(): TileCollection
     {
         $tiles = new TileCollection;
-        while ($this->count() > 0 && $tile = $this->pop()) {
-            $tiles->push($tile);
+        while ($this->count() > 0) {
+            $tiles->push($this->pop());
         }
 
         return $tiles;

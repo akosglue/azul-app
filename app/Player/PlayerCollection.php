@@ -9,8 +9,13 @@ use App\Assert\Assert;
 /**
  * @method Player current()
  */
+
+/** @extends \SplStack<Player> */
 class PlayerCollection extends \SplStack
 {
+    /**
+     * @param  array<Player>  $players
+     */
     public function __construct(array $players = [])
     {
         Assert::allIsInstanceOf($players, Player::class);

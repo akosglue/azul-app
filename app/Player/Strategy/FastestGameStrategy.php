@@ -63,6 +63,9 @@ class FastestGameStrategy extends AbstractStrategy
         return null;
     }
 
+    /**
+     * @return array<string>
+     */
     private function getColors(): array
     {
         $colors = Color::getAll();
@@ -74,7 +77,7 @@ class FastestGameStrategy extends AbstractStrategy
     private function getMoveByColorAndRow(
         FactoryCollection $factories,
         Table $table,
-        $color,
+        string $color,
         int $getRowNumber
     ): ?Move {
         foreach ($factories as $factory) {

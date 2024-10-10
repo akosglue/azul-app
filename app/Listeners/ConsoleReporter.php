@@ -26,7 +26,7 @@ class ConsoleReporter
 
     private const SECONDS_PAUSE_BETWEEN_MOVES = 100000;
 
-    private $output;
+    private OutputInterface $output;
 
     private \App\Game\GameRound $round;
 

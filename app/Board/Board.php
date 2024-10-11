@@ -34,6 +34,9 @@ class Board
 
     private BoardRow $row5;
 
+    /**
+     * @var array<mixed>
+     */
     private array $rowNumberToDiscard = [];
 
     private int $score = 0;
@@ -49,6 +52,9 @@ class Board
         $this->floorLine = new TileCollection;
     }
 
+    /**
+     * @return int[]
+     */
     public static function getRowNumbers(): array
     {
         return [
@@ -60,7 +66,7 @@ class Board
         ];
     }
 
-    public function placeTiles(TileCollection $tiles, $rowOrNumber): void
+    public function placeTiles(TileCollection $tiles, BoardRow|int $rowOrNumber): void
     {
         // TODO should check if wall color is filled by tiles color - throw exception, in Game?
         $row = $rowOrNumber instanceof BoardRow ? $rowOrNumber : $this->getRow($rowOrNumber);
@@ -176,6 +182,9 @@ class Board
         return $this->wall->isColorFilled($color, $rowNumber);
     }
 
+    /**
+     * @return array<mixed>
+     */
     public function getPattern(BoardRow $row): array
     {
         return $this->wall->getPattern($row);
@@ -216,7 +225,10 @@ class Board
         return $score;
     }
 
-    private function getAdjacentScoreAboveOrLeft($placedColor, $slots)
+    /**
+     * @param  array<mixed>  $slots
+     */
+    private function getAdjacentScoreAboveOrLeft(string $placedColor, array $slots): int
     {
         $score = 0;
         foreach ($slots as $color => $slot) {
@@ -234,7 +246,10 @@ class Board
         return $score;
     }
 
-    private function getAdjacentScoreBelowOrRight($placedColor, $slots)
+    /**
+     * @param  array<mixed>  $slots
+     */
+    private function getAdjacentScoreBelowOrRight(string $placedColor, array $slots): int
     {
         $score = 0;
         $pivot = false;
@@ -255,7 +270,7 @@ class Board
         return $score;
     }
 
-    private function calculateScore($placedColor, $row): int
+    private function calculateScore(string $placedColor, BoardRow $row): int
     {
         $score = 1;
 

@@ -16,7 +16,9 @@ class Game
 {
     private Bag $bag;
 
-    private ?GameRound $round = null;
+    private GameRound $round;
+
+    private bool $shouldCreateRound = true;
 
     private Dispatcher $dispatcher;
 
@@ -29,11 +31,13 @@ class Game
     public function play(PlayerCollection $players): void
     {
         while (true) {
-            if (! $this->round) {
+            if ($this->shouldCreateRound) {
                 $this->round = $this->createRound($players);
                 $this->dispatch(new RoundCreatedEvent($this->round));
+                $this->shouldCreateRound = false;
             }
             if ($this->round->canContinue()) {
+                $this->shouldCreateRound = false;
                 $table = $this->round->getTable();
                 foreach ($players as $player) {
                     $move = $player->getNextMove(
@@ -55,7 +59,7 @@ class Game
                     $this->dispatch(new PlayerFinishTurnEvent($player, $this->round));
                 }
             } else {
-                $this->round = null;
+                $this->shouldCreateRound = true;
                 foreach ($players as $player) {
                     $player->doWallTiling();
                     $this->dispatch(new WallTiledEvent($player));

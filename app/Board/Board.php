@@ -276,6 +276,7 @@ class Board
 
         $pattern = $this->getPattern($row);
         $idx = array_search($placedColor, array_keys($pattern));
+        Assert::notFalse($idx);
         $column = $this->wall->getColumn($idx);
 
         $above = $this->getAdjacentScoreAboveOrLeft($placedColor, $column);

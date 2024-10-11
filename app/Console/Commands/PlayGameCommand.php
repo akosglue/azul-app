@@ -29,6 +29,8 @@ class PlayGameCommand extends Command
         $players = new PlayerCollection([
             new Player(new Board, 'Ivan'),
             new Player(new Board, 'Petr'),
+            new Player(new Board, 'Ian'),
+            new Player(new Board, 'Jonas'),
         ]);
 
         $dispatcher->subscribe(new ConsoleReporter($players, $this->output));

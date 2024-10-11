@@ -75,15 +75,29 @@ class Game
     {
         $table = new Table(new Marker);
 
+        $factories = [
+            new Factory($this->bag->getNextPlate()),
+            new Factory($this->bag->getNextPlate()),
+            new Factory($this->bag->getNextPlate()),
+            new Factory($this->bag->getNextPlate()),
+            new Factory($this->bag->getNextPlate()),
+        ];
+
+        if (count($players) == 3) {
+            $factories[] = new Factory($this->bag->getNextPlate());
+            $factories[] = new Factory($this->bag->getNextPlate());
+        }
+
+        if (count($players) == 4) {
+            $factories[] = new Factory($this->bag->getNextPlate());
+            $factories[] = new Factory($this->bag->getNextPlate());
+            $factories[] = new Factory($this->bag->getNextPlate());
+            $factories[] = new Factory($this->bag->getNextPlate());
+        }
+
         return new GameRound(
             $table,
-            [
-                new Factory($this->bag->getNextPlate()),
-                new Factory($this->bag->getNextPlate()),
-                new Factory($this->bag->getNextPlate()),
-                new Factory($this->bag->getNextPlate()),
-                new Factory($this->bag->getNextPlate()),
-            ],
+            $factories,
             $players
         );
     }

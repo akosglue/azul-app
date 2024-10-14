@@ -34,6 +34,14 @@ test('testIsAnyRowCompleted_AllColorsOnAllRows_True', function () {
         }
     }
     $this->assertTrue($wall->isAnyRowCompleted());
+
+    for ($i = 0; $i < 5; $i++) {
+        expect($wall->getColumn($i))->toHaveCount(5);
+        foreach ($wall->getColumn($i) as $color => $tile) {
+            expect($color)->toBe($tile->getColor());
+        }
+    }
+
 });
 
 test('testFillColor_SecondRowCompleted_TileTakenFromRow', function () {
@@ -83,4 +91,26 @@ test('testIsColorFilled_NothingPlaced_False', function () {
     $row->shouldReceive('getMainColor')->andReturn(Color::BLACK);
     $row->shouldReceive('getRowNumber')->andReturn(1);
     $this->assertFalse($wall->isColorFilledByRow($row));
+});
+
+test('exception for wrong high index', function () {
+    $this->expectException(ErrorException::class);
+
+    $wall = new BoardWall;
+    $row = \Mockery::mock(BoardRow::class, ['maxTiles' => 1]);
+    $row->shouldReceive('getMainColor')->andReturn(Color::BLACK);
+    $row->shouldReceive('getRowNumber')->andReturn(1);
+
+    $wall->isColorFilled(Color::RED, 6);
+});
+
+test('exception for wrong low index', function () {
+    $this->expectException(ErrorException::class);
+
+    $wall = new BoardWall;
+    $row = \Mockery::mock(BoardRow::class, ['maxTiles' => 1]);
+    $row->shouldReceive('getMainColor')->andReturn(Color::BLACK);
+    $row->shouldReceive('getRowNumber')->andReturn(1);
+
+    $wall->isColorFilled(Color::RED, 0);
 });

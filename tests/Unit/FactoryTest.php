@@ -38,6 +38,7 @@ test('testTakeAll_3Red1Black_NoTilesLeft', function () {
     $this->assertEquals(0, $factory->getTilesCount(Color::RED));
     $this->assertEquals(0, $factory->getTilesCount(Color::BLACK));
     $this->assertEquals(0, $factory->getTilesCount());
+    $this->assertCount(0, $factory->getTiles());
 });
 
 test('testTake_NoExistedColor_Exception', function () {

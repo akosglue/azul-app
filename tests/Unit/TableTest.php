@@ -12,6 +12,8 @@ test('testCountTotal_2DifferentColors_Total2', function () {
         new Tile(Color::CYAN),
     ]));
     $this->assertEquals(2, $table->getTilesCount());
+    $this->assertCount(2, $table->getCenterPileTiles());
+    $this->assertCount(0, $table->takeAll()); //normally not called on table (because tiles are removed only by color), but only on factories
 });
 
 test('testCountTotal_2SameColors_Total2', function () {

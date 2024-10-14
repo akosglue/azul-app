@@ -11,10 +11,15 @@ use App\Tile\Tile;
 use App\Tile\TileCollection;
 
 test('testGetNextMove_ReturnMoveObject', function () {
-    $player = new Player(new Board);
+    $b = new Board;
+    $player = new Player($b, 'John');
     $factory = new Factory(new TileCollection([new Tile(Color::BLUE)]));
     $move = $player->getNextMove(new FactoryCollection([$factory]), createGameTable());
     $this->assertNotNull($move);
+    expect($player->getName())->toBe('John');
+    expect($player->getBoard())->toBeInstanceOf(Board::class);
+    expect($player->getBoard()->getScore())->toBe(0);
+    expect($player->getScore())->toBe(0);
 });
 
 test('testGetNextMove_TiledFactoryEmptyTable_TookTilesFromFactory', function () {

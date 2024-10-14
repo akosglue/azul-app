@@ -6,6 +6,9 @@ namespace App\Events;
 
 use App\Player\Player;
 
+/**
+ * @codeCoverageIgnore
+ */
 class WallTiledEvent extends GameEvent
 {
     private Player $player;

@@ -7,6 +7,9 @@ namespace App\Events;
 use App\Game\GameRound;
 use App\Player\Player;
 
+/**
+ * @codeCoverageIgnore
+ */
 class PlayerFinishTurnEvent extends GameEvent
 {
     private Player $player;

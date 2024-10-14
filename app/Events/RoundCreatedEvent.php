@@ -6,6 +6,9 @@ namespace App\Events;
 
 use App\Game\GameRound;
 
+/**
+ * @codeCoverageIgnore
+ */
 class RoundCreatedEvent extends GameEvent
 {
     protected GameRound $round;

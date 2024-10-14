@@ -193,3 +193,22 @@ test('testCorrect_Scoring_After_Multiple_Tiling', function () {
     $this->assertTrue($player->isGameOver());
     $this->assertEquals(109 + (5 * 2) + (5 * 7) + (5 * 10), $board->getScore()); //with bonuses
 });
+
+test('tiles are discarded if a color is already tiled', function () {
+    $board = new Board;
+    $color = Color::RED;
+    $row = Board::ROW_1;
+    $board->placeTiles(new TileCollection(new Tile($color)), $row);
+
+    $this->assertEquals(1, $board->getRowTilesCount($row));
+    $this->assertFalse($board->isWallColorFilled($color, $row));
+
+    $board->doWallTiling();
+    $tiles = $board->discardTiles();
+    $this->assertEquals(0, $tiles->count());
+
+    $board->placeTiles(new TileCollection(new Tile($color)), $row);
+    $this->assertTrue($board->isWallColorFilled($color, $row));
+    $board->doWallTiling();
+    $this->assertEquals(1, $board->getFloorTilesCount());
+});

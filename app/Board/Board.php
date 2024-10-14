@@ -129,7 +129,7 @@ class Board
                     $this->rowNumberToDiscard[$row->getRowNumber()] = true;
                     $this->score += $this->calculateScore($placedColor, $row);
                 } else {
-                    foreach ($row->getTiles() as $tile) {
+                    foreach ($row->getTiles() as $tile) {//when color is collected on pattern for which a color is already tiled
                         $this->placeOnFloor($tile);
                     }
                 }

@@ -8,9 +8,12 @@ use App\Board\Board;
 use App\Events\PlayerFinishTurnEvent;
 use App\Events\RoundCreatedEvent;
 use App\Events\WallTiledEvent;
+use App\Game\FactoryCollection;
+use App\Game\Table;
 use App\Player\Player;
 use App\Player\PlayerCollection;
 use App\Tile\Color;
+use App\Tile\Tile;
 use Illuminate\Events\Dispatcher;
 use Symfony\Component\Console\Output\OutputInterface;
 
@@ -128,7 +131,7 @@ class ConsoleReporter
         }
     }
 
-    private function drawFactories(\App\Game\FactoryCollection $factories): void
+    private function drawFactories(FactoryCollection $factories): void
     {
         foreach ($factories as $factory) {
             $this->write('|_');
@@ -141,7 +144,7 @@ class ConsoleReporter
         $this->writeln('');
     }
 
-    private function drawTable(\App\Game\Table $table): void
+    private function drawTable(Table $table): void
     {
         $this->write('table -> _');
         if ($table->getMarker()) {
@@ -156,7 +159,7 @@ class ConsoleReporter
         $this->writeln('');
     }
 
-    private function drawTile(\App\Tile\Tile $tile): void
+    private function drawTile(Tile $tile): void
     {
         $this->write($this->getColorSymbol($tile->getColor()));
     }

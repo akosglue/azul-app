@@ -104,7 +104,7 @@ class BoardWall
 
         for ($i = 0; $i < 5; $i++) {
             $column = $this->getColumn($i);
-            if (count(array_filter($column)) == 5) {
+            if (count(array_filter($column)) === 5) {
                 $completed++;
             }
         }
@@ -119,7 +119,7 @@ class BoardWall
         $completed = 0;
         foreach (Color::getAll() as $color) {
             $colors = array_column($this->pattern, $color);
-            if (count(array_filter($colors)) == 5) {
+            if (count(array_filter($colors)) === 5) {
                 $completed++;
             }
         }
@@ -155,7 +155,7 @@ class BoardWall
         $colors = [];
         foreach (self::PATTERN as $rowNumber => $rowColors) {
             foreach ($rowColors as $k => $color) {
-                if ($k == $idx) {
+                if ($k === $idx) {
                     $colors[$color] = $this->pattern[$rowNumber][$color];
                 }
             }

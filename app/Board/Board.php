@@ -183,7 +183,7 @@ class Board
     }
 
     /**
-     * @return array<mixed>
+     * @return array<Tile|null>
      */
     public function getPattern(BoardRow $row): array
     {

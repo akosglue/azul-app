@@ -7,6 +7,7 @@ namespace App\Board;
 use App\Assert\Assert;
 use App\Exceptions\BoardWallColorAlreadyFilledException;
 use App\Tile\Color;
+use App\Tile\Tile;
 
 class BoardWall
 {
@@ -49,7 +50,7 @@ class BoardWall
     ];
 
     /**
-     * @var array<mixed>
+     * @var array<int, array<string, Tile|null>>
      */
     private array $pattern;
 
@@ -139,7 +140,7 @@ class BoardWall
     }
 
     /**
-     * @return array<mixed>
+     * @return array<Tile|null>
      */
     public function getPattern(BoardRow $row): array
     {

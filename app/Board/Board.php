@@ -81,8 +81,6 @@ class Board
     {
         Assert::range($rowNumber, 1, 5);
         switch ($rowNumber) {
-            case 1:
-                return $this->row1;
             case 2:
                 return $this->row2;
             case 3:

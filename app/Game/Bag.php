@@ -12,12 +12,12 @@ use App\Tile\TileCollection;
 class Bag
 {
     /**
-     * @var array<mixed>
+     * @var array<string, int>
      */
     private array $tiles = [];
 
     /**
-     * @var array<mixed>
+     * @var array<string, int>
      */
     private array $discardTiles = [];
 

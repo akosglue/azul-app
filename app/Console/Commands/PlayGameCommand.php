@@ -13,6 +13,9 @@ use App\Player\PlayerCollection;
 use Illuminate\Console\Command;
 use Illuminate\Events\Dispatcher;
 
+/**
+ * @codeCoverageIgnore
+ */
 class PlayGameCommand extends Command
 {
     protected $signature = 'app:play';

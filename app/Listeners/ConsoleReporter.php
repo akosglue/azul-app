@@ -17,6 +17,9 @@ use App\Tile\Tile;
 use Illuminate\Events\Dispatcher;
 use Symfony\Component\Console\Output\OutputInterface;
 
+/**
+ * @codeCoverageIgnore
+ */
 class ConsoleReporter
 {
     private const EMPTY_SLOT_SIGNS = [

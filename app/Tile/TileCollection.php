@@ -5,22 +5,29 @@ declare(strict_types=1);
 namespace App\Tile;
 
 /**
- * @method Tile current()
- * @method Tile bottom()
- * @method Tile top()
+ * @implements \IteratorAggregate<Tile>
  */
-
-/** @extends \SplStack<Tile> */
-class TileCollection extends \SplStack
+class TileCollection implements \Countable, \IteratorAggregate
 {
+    /**
+     * @var \SplStack<Tile>
+     */
+    private \SplStack $tiles;
+
     /**
      * @param  array<Tile>  $tiles
      */
     private function __construct(array $tiles)
     {
+        $this->tiles = new \SplStack;
         foreach ($tiles as $tile) {
             $this->addTile($tile);
         }
+    }
+
+    public function getIterator(): \Traversable
+    {
+        return $this->tiles;
     }
 
     public static function createEmpty(): TileCollection
@@ -43,7 +50,7 @@ class TileCollection extends \SplStack
 
     public function addTile(Tile $tile): void
     {
-        $this->push($tile);
+        $this->tiles->push($tile);
     }
 
     public function takeAllTiles(): TileCollection
@@ -54,5 +61,25 @@ class TileCollection extends \SplStack
         }
 
         return $tiles;
+    }
+
+    public function count(): int
+    {
+        return $this->tiles->count();
+    }
+
+    public function pop(): Tile
+    {
+        return $this->tiles->pop();
+    }
+
+    public function push(Tile $tile): void
+    {
+        $this->tiles->push($tile);
+    }
+
+    public function bottom(): Tile
+    {
+        return $this->tiles->bottom();
     }
 }

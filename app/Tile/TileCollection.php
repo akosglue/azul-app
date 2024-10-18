@@ -14,16 +14,31 @@ namespace App\Tile;
 class TileCollection extends \SplStack
 {
     /**
-     * @param  array<Tile>|Tile  $tiles
+     * @param  array<Tile>  $tiles
      */
-    public function __construct(array|Tile $tiles = [])
+    private function __construct(array $tiles)
     {
-        if ($tiles instanceof Tile) {
-            $tiles = [$tiles];
-        }
         foreach ($tiles as $tile) {
             $this->addTile($tile);
         }
+    }
+
+    public static function createEmpty(): TileCollection
+    {
+        return new TileCollection([]);
+    }
+
+    public static function createWithTile(Tile $tile): TileCollection
+    {
+        return new TileCollection([$tile]);
+    }
+
+    /**
+     * @param  array<Tile>  $tiles
+     */
+    public static function createWithTiles(array $tiles): TileCollection
+    {
+        return new TileCollection($tiles);
     }
 
     public function addTile(Tile $tile): void
@@ -33,7 +48,7 @@ class TileCollection extends \SplStack
 
     public function takeAllTiles(): TileCollection
     {
-        $tiles = new TileCollection;
+        $tiles = TileCollection::createEmpty();
         while ($this->count() > 0) {
             $tiles->push($this->pop());
         }

@@ -14,9 +14,9 @@ namespace App\Tile;
 class TileCollection extends \SplStack
 {
     /**
-     * @param  array<Tile>|Tile|TileCollection  $tiles
+     * @param  array<Tile>|Tile  $tiles
      */
-    public function __construct(array|Tile|TileCollection $tiles = [])
+    public function __construct(array|Tile $tiles = [])
     {
         if ($tiles instanceof Tile) {
             $tiles = [$tiles];

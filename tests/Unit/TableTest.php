@@ -7,7 +7,7 @@ use App\Tile\TileCollection;
 
 test('testCountTotal_2DifferentColors_Total2', function () {
     $table = createGameTable();
-    $table->addToCenterPile(new TileCollection([
+    $table->addToCenterPile(TileCollection::createWithTiles([
         new Tile(Color::RED),
         new Tile(Color::CYAN),
     ]));
@@ -18,7 +18,7 @@ test('testCountTotal_2DifferentColors_Total2', function () {
 
 test('testCountTotal_2SameColors_Total2', function () {
     $table = createGameTable();
-    $table->addToCenterPile(new TileCollection([
+    $table->addToCenterPile(TileCollection::createWithTiles([
         new Tile(Color::RED),
         new Tile(Color::RED),
     ]));
@@ -32,7 +32,7 @@ test('testCountTotal_Empty_Total0', function () {
 
 test('testCountByColor', function () {
     $table = createGameTable();
-    $table->addToCenterPile(new TileCollection([
+    $table->addToCenterPile(TileCollection::createWithTiles([
         new Tile(Color::RED),
         new Tile(Color::RED),
         new Tile(Color::CYAN),
@@ -64,9 +64,7 @@ test('testTakeMarker_Twice_GotException', function () {
 test('testTake_HasMarker_MarkerLeft', function () {
     $table = createGameTable();
     $color = Color::RED;
-    $table->addToCenterPile(new TileCollection([
-        new Tile($color),
-    ]));
+    $table->addToCenterPile(TileCollection::createWithTile(new Tile($color)));
     $this->assertTrue($table->hasMarker());
     $tiles = $table->take($color);
     $this->assertCount(1, $tiles);

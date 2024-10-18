@@ -7,7 +7,7 @@ use App\Tile\TileCollection;
 
 test('testTakeRed_3Red1Black_1TileLeft', function () {
     $factory = new Factory(
-        new TileCollection([
+        TileCollection::createWithTiles([
             new Tile(Color::RED),
             new Tile(Color::RED),
             new Tile(Color::RED),
@@ -24,7 +24,7 @@ test('testTakeRed_3Red1Black_1TileLeft', function () {
 
 test('testTakeAll_3Red1Black_NoTilesLeft', function () {
     $factory = new Factory(
-        new TileCollection([
+        TileCollection::createWithTiles([
             new Tile(Color::RED),
             new Tile(Color::RED),
             new Tile(Color::RED),
@@ -43,7 +43,7 @@ test('testTakeAll_3Red1Black_NoTilesLeft', function () {
 
 test('testTake_NoExistedColor_Exception', function () {
     $factory = new Factory(
-        new TileCollection(array_fill(0, 4, new Tile(Color::BLACK)))
+        TileCollection::createWithTiles(array_fill(0, 4, new Tile(Color::BLACK)))
     );
     $this->expectExceptionMessageMatches('#at least 1#');
     $factory->take(Color::CYAN);

@@ -12,7 +12,7 @@ test('testPlaceTests_2inRow1_1isOnFloor', function () {
     $this->assertEquals(0, $b->getRowTilesCount(Board::ROW_1));
     $this->assertEquals(0, $b->getFloorTilesCount());
 
-    $b->placeTiles(new TileCollection([new Tile(Color::RED), new Tile(Color::RED)]), Board::ROW_1);
+    $b->placeTiles(TileCollection::createWithTiles([new Tile(Color::RED), new Tile(Color::RED)]), Board::ROW_1);
     $this->assertEquals(1, $b->getFloorTilesCount());
     $this->assertEquals(1, $b->getRowTilesCount(Board::ROW_1));
 });
@@ -21,7 +21,7 @@ test('testPlaceTests_1inRow2_NothingOnFloor', function () {
     $b = new Board;
     $this->assertEquals(0, $b->getRowTilesCount(Board::ROW_2));
     $this->assertEquals(0, $b->getFloorTilesCount());
-    $b->placeTiles(new TileCollection([new Tile(Color::RED)]), Board::ROW_2);
+    $b->placeTiles(TileCollection::createWithTiles([new Tile(Color::RED)]), Board::ROW_2);
     $this->assertEquals(0, $b->getFloorTilesCount());
     $this->assertEquals(1, $b->getRowTilesCount(Board::ROW_2));
 });
@@ -29,7 +29,7 @@ test('testPlaceTests_1inRow2_NothingOnFloor', function () {
 test('testPlaceTiles_4TilesOn2Row_2OnFloor', function () {
     $b = new Board;
     $tiles = [new Tile(Color::RED), new Tile(Color::RED), new Tile(Color::RED), new Tile(Color::RED)];
-    $b->placeTiles(new TileCollection($tiles), Board::ROW_2);
+    $b->placeTiles(TileCollection::createWithTiles($tiles), Board::ROW_2);
     $this->assertEquals(2, $b->getFloorTilesCount());
     $this->assertEquals(2, $b->getRowTilesCount(Board::ROW_2));
 });
@@ -38,8 +38,8 @@ test('testDiscardTiles_TileOnFloor_FloorEmpty', function () {
     $board = new Board;
     $color = Color::RED;
     $row = Board::ROW_1;
-    $board->placeTiles(new TileCollection(new Tile($color)), $row);
-    $board->placeTiles(new TileCollection(new Tile($color)), $row); // on floor
+    $board->placeTiles(TileCollection::createWithTile(new Tile($color)), $row);
+    $board->placeTiles(TileCollection::createWithTile(new Tile($color)), $row); // on floor
 
     $this->assertEquals(1, $board->getFloorTilesCount());
     $this->assertEquals(1, $board->getRowTilesCount($row));
@@ -198,7 +198,7 @@ test('tiles are discarded if a color is already tiled', function () {
     $board = new Board;
     $color = Color::RED;
     $row = Board::ROW_1;
-    $board->placeTiles(new TileCollection(new Tile($color)), $row);
+    $board->placeTiles(TileCollection::createWithTile(new Tile($color)), $row);
 
     $this->assertEquals(1, $board->getRowTilesCount($row));
     $this->assertFalse($board->isWallColorFilled($color, $row));
@@ -207,7 +207,7 @@ test('tiles are discarded if a color is already tiled', function () {
     $tiles = $board->discardTiles();
     $this->assertEquals(0, $tiles->count());
 
-    $board->placeTiles(new TileCollection(new Tile($color)), $row);
+    $board->placeTiles(TileCollection::createWithTile(new Tile($color)), $row);
     $this->assertTrue($board->isWallColorFilled($color, $row));
     $board->doWallTiling();
     $this->assertEquals(1, $board->getFloorTilesCount());

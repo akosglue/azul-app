@@ -22,7 +22,7 @@ class Factory implements ITileStorage
     public function takeAll(): TileCollection
     {
         $tiles = $this->tiles;
-        $this->tiles = new TileCollection;
+        $this->tiles = TileCollection::createEmpty();
 
         return $tiles;
     }
@@ -41,9 +41,9 @@ class Factory implements ITileStorage
         }
         Assert::minCount($tilesByColor, 1);
         // TODO either do everything only with asserts or only with exceptions
-        $this->tiles = new TileCollection($tilesLeft);
+        $this->tiles = TileCollection::createWithTiles($tilesLeft);
 
-        return new TileCollection($tilesByColor);
+        return TileCollection::createWithTiles($tilesByColor);
     }
 
     public function getTilesCount(?string $color = null): int

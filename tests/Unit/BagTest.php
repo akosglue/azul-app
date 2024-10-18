@@ -37,7 +37,7 @@ test('testNextPlate_5TilesRefill4_Get4TilesTwice', function () {
 
 test('testNextPlate_HasRedInTilesAndBlackInDiscard_UseDiscardedOnlyAfterTilesEmpty', function () {
     $bag = (new Bag)->addTiles($tileColor = Color::BLACK, 4);
-    $bag->discardTiles(new TileCollection([
+    $bag->discardTiles(TileCollection::createWithTiles([
         new Tile(Color::RED),
         new Tile(Color::RED),
         new Tile(Color::RED),
@@ -61,7 +61,7 @@ test('exception with empty tile', function () {
 
 test('discard without empty tiles', function () {
     $bag = (new Bag)->addTiles(Color::RED, 4);
-    $bag->discardTiles(new TileCollection([
+    $bag->discardTiles(TileCollection::createWithTiles([
         new Tile(Color::RED),
         new Tile(Color::RED),
         new Tile(Color::RED),
@@ -73,7 +73,7 @@ test('discard without empty tiles', function () {
 
 test('discard with empty tile as first', function () {
     $bag = (new Bag)->addTiles(Color::RED, 4);
-    $bag->discardTiles(new TileCollection([
+    $bag->discardTiles(TileCollection::createWithTiles([
         new Tile(''),
         new Tile(Color::RED),
         new Tile(Color::RED),
@@ -85,7 +85,7 @@ test('discard with empty tile as first', function () {
 
 test('discard with one empty tile as not first', function () {
     $bag = (new Bag)->addTiles(Color::RED, 4);
-    $bag->discardTiles(new TileCollection([
+    $bag->discardTiles(TileCollection::createWithTiles([
         new Tile(Color::RED),
         new Tile(Color::RED),
         new Tile(''),

@@ -7,12 +7,12 @@ use App\Tile\TileCollection;
 mutates(TileCollection::class);
 
 test('can be created with single tile', function () {
-    $t = new TileCollection(new Tile(Color::BLUE));
+    $t = TileCollection::createWithTile(new Tile(Color::BLUE));
     $this->assertCount(1, $t->takeAllTiles());
 });
 
 test('can be created with array of tiles', function () {
-    $t = new TileCollection([
+    $t = TileCollection::createWithTiles([
         new Tile(Color::BLUE),
         new Tile(Color::BLUE),
     ]);

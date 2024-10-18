@@ -27,7 +27,7 @@ class Table implements ITileStorage
     {
         foreach ($tiles as $tile) {
             if (! array_key_exists($tile->getColor(), $this->centerPile)) {
-                $this->centerPile[$tile->getColor()] = new TileCollection;
+                $this->centerPile[$tile->getColor()] = TileCollection::createEmpty();
             }
             $this->centerPile[$tile->getColor()]->addTile($tile);
         }
@@ -88,6 +88,6 @@ class Table implements ITileStorage
 
     public function takeAll(): TileCollection
     {
-        return new TileCollection;
+        return TileCollection::createEmpty();
     }
 }

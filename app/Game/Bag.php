@@ -36,7 +36,7 @@ class Bag
         foreach ($this->tiles as $k => $tile) {
             Assert::notEmpty($k);
         }
-        $plateTiles = new TileCollection;
+        $plateTiles = TileCollection::createEmpty();
         // TODO check rules - if there are 3 left in bag - game stops?
         if (array_sum($this->tiles) + array_sum($this->discardTiles) >= 4) {// @pest-mutate-ignore
             while ($plateTiles->count() !== 4) {

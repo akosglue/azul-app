@@ -18,11 +18,11 @@ test('testKeepPlaying_EmptyFactoriesAndTable_False', function () {
         new Player(new Board, 'Ivan'),
         new Player(new Board, 'Petr'),
     ]);
-    $table->addToCenterPile(new TileCollection([new Tile(Color::YELLOW)]));
+    $table->addToCenterPile(TileCollection::createWithTiles([new Tile(Color::YELLOW)]));
     $round = new GameRound($table,
         [
             $factory1 = new Factory(
-                new TileCollection([
+                TileCollection::createWithTiles([
                     new Tile(Color::YELLOW),
                     new Tile(Color::YELLOW),
                     new Tile(Color::YELLOW),
@@ -30,7 +30,7 @@ test('testKeepPlaying_EmptyFactoriesAndTable_False', function () {
                 ])
             ),
             $factory2 = new Factory(
-                new TileCollection([
+                TileCollection::createWithTiles([
                     new Tile(Color::CYAN),
                     new Tile(Color::CYAN),
                     new Tile(Color::CYAN),
@@ -38,7 +38,7 @@ test('testKeepPlaying_EmptyFactoriesAndTable_False', function () {
                 ])
             ),
             $factory3 = new Factory(
-                new TileCollection([
+                TileCollection::createWithTiles([
                     new Tile(Color::RED),
                     new Tile(Color::RED),
                     new Tile(Color::RED),
@@ -46,7 +46,7 @@ test('testKeepPlaying_EmptyFactoriesAndTable_False', function () {
                 ])
             ),
             $factory4 = new Factory(
-                new TileCollection([
+                TileCollection::createWithTiles([
                     new Tile(Color::BLUE),
                     new Tile(Color::BLUE),
                     new Tile(Color::BLUE),
@@ -54,7 +54,7 @@ test('testKeepPlaying_EmptyFactoriesAndTable_False', function () {
                 ])
             ),
             $factory5 = new Factory(
-                new TileCollection([
+                TileCollection::createWithTiles([
                     new Tile(Color::BLACK),
                     new Tile(Color::BLACK),
                     new Tile(Color::BLACK),
@@ -123,7 +123,7 @@ test('multiple factory contents', function ($f1, $f2, $f3, $f4, $f5, $f6, $f7) {
 })->with([
     'five tiles' => [
         new Factory(
-            new TileCollection([
+            TileCollection::createWithTiles([
                 new Tile(Color::CYAN),
                 new Tile(Color::CYAN),
                 new Tile(Color::CYAN),
@@ -132,7 +132,7 @@ test('multiple factory contents', function ($f1, $f2, $f3, $f4, $f5, $f6, $f7) {
             ])
         ),
         new Factory(
-            new TileCollection([
+            TileCollection::createWithTiles([
                 new Tile(Color::CYAN),
                 new Tile(Color::CYAN),
                 new Tile(Color::CYAN),
@@ -141,7 +141,7 @@ test('multiple factory contents', function ($f1, $f2, $f3, $f4, $f5, $f6, $f7) {
             ])
         ),
         new Factory(
-            new TileCollection([
+            TileCollection::createWithTiles([
                 new Tile(Color::CYAN),
                 new Tile(Color::CYAN),
                 new Tile(Color::CYAN),
@@ -150,7 +150,7 @@ test('multiple factory contents', function ($f1, $f2, $f3, $f4, $f5, $f6, $f7) {
             ])
         ),
         new Factory(
-            new TileCollection([
+            TileCollection::createWithTiles([
                 new Tile(Color::CYAN),
                 new Tile(Color::CYAN),
                 new Tile(Color::CYAN),
@@ -159,7 +159,7 @@ test('multiple factory contents', function ($f1, $f2, $f3, $f4, $f5, $f6, $f7) {
             ])
         ),
         new Factory(
-            new TileCollection([
+            TileCollection::createWithTiles([
                 new Tile(Color::CYAN),
                 new Tile(Color::CYAN),
                 new Tile(Color::CYAN),
@@ -168,7 +168,7 @@ test('multiple factory contents', function ($f1, $f2, $f3, $f4, $f5, $f6, $f7) {
             ])
         ),
         new Factory(
-            new TileCollection([
+            TileCollection::createWithTiles([
                 new Tile(Color::CYAN),
                 new Tile(Color::CYAN),
                 new Tile(Color::CYAN),
@@ -177,7 +177,7 @@ test('multiple factory contents', function ($f1, $f2, $f3, $f4, $f5, $f6, $f7) {
             ])
         ),
         new Factory(
-            new TileCollection([
+            TileCollection::createWithTiles([
                 new Tile(Color::CYAN),
                 new Tile(Color::CYAN),
                 new Tile(Color::CYAN),
@@ -188,7 +188,7 @@ test('multiple factory contents', function ($f1, $f2, $f3, $f4, $f5, $f6, $f7) {
     ],
     'four tiles' => [
         new Factory(
-            new TileCollection([
+            TileCollection::createWithTiles([
                 new Tile(Color::CYAN),
                 new Tile(Color::CYAN),
                 new Tile(Color::CYAN),
@@ -196,7 +196,7 @@ test('multiple factory contents', function ($f1, $f2, $f3, $f4, $f5, $f6, $f7) {
             ])
         ),
         new Factory(
-            new TileCollection([
+            TileCollection::createWithTiles([
                 new Tile(Color::CYAN),
                 new Tile(Color::CYAN),
                 new Tile(Color::CYAN),
@@ -204,7 +204,7 @@ test('multiple factory contents', function ($f1, $f2, $f3, $f4, $f5, $f6, $f7) {
             ])
         ),
         new Factory(
-            new TileCollection([
+            TileCollection::createWithTiles([
                 new Tile(Color::CYAN),
                 new Tile(Color::CYAN),
                 new Tile(Color::CYAN),
@@ -212,7 +212,7 @@ test('multiple factory contents', function ($f1, $f2, $f3, $f4, $f5, $f6, $f7) {
             ])
         ),
         new Factory(
-            new TileCollection([
+            TileCollection::createWithTiles([
                 new Tile(Color::CYAN),
                 new Tile(Color::CYAN),
                 new Tile(Color::CYAN),
@@ -220,7 +220,7 @@ test('multiple factory contents', function ($f1, $f2, $f3, $f4, $f5, $f6, $f7) {
             ])
         ),
         new Factory(
-            new TileCollection([
+            TileCollection::createWithTiles([
                 new Tile(Color::CYAN),
                 new Tile(Color::CYAN),
                 new Tile(Color::CYAN),
@@ -228,7 +228,7 @@ test('multiple factory contents', function ($f1, $f2, $f3, $f4, $f5, $f6, $f7) {
             ])
         ),
         new Factory(
-            new TileCollection([
+            TileCollection::createWithTiles([
                 new Tile(Color::CYAN),
                 new Tile(Color::CYAN),
                 new Tile(Color::CYAN),
@@ -236,7 +236,7 @@ test('multiple factory contents', function ($f1, $f2, $f3, $f4, $f5, $f6, $f7) {
             ])
         ),
         new Factory(
-            new TileCollection([
+            TileCollection::createWithTiles([
                 new Tile(Color::CYAN),
                 new Tile(Color::CYAN),
                 new Tile(Color::CYAN),
@@ -246,49 +246,49 @@ test('multiple factory contents', function ($f1, $f2, $f3, $f4, $f5, $f6, $f7) {
     ],
     'three tiles' => [
         new Factory(
-            new TileCollection([
+            TileCollection::createWithTiles([
                 new Tile(Color::CYAN),
                 new Tile(Color::CYAN),
                 new Tile(Color::CYAN),
             ])
         ),
         new Factory(
-            new TileCollection([
+            TileCollection::createWithTiles([
                 new Tile(Color::CYAN),
                 new Tile(Color::CYAN),
                 new Tile(Color::CYAN),
             ])
         ),
         new Factory(
-            new TileCollection([
+            TileCollection::createWithTiles([
                 new Tile(Color::CYAN),
                 new Tile(Color::CYAN),
                 new Tile(Color::CYAN),
             ])
         ),
         new Factory(
-            new TileCollection([
+            TileCollection::createWithTiles([
                 new Tile(Color::CYAN),
                 new Tile(Color::CYAN),
                 new Tile(Color::CYAN),
             ])
         ),
         new Factory(
-            new TileCollection([
+            TileCollection::createWithTiles([
                 new Tile(Color::CYAN),
                 new Tile(Color::CYAN),
                 new Tile(Color::CYAN),
             ])
         ),
         new Factory(
-            new TileCollection([
+            TileCollection::createWithTiles([
                 new Tile(Color::CYAN),
                 new Tile(Color::CYAN),
                 new Tile(Color::CYAN),
             ])
         ),
         new Factory(
-            new TileCollection([
+            TileCollection::createWithTiles([
                 new Tile(Color::CYAN),
                 new Tile(Color::CYAN),
                 new Tile(Color::CYAN),
@@ -297,43 +297,43 @@ test('multiple factory contents', function ($f1, $f2, $f3, $f4, $f5, $f6, $f7) {
     ],
     'two tiles' => [
         new Factory(
-            new TileCollection([
+            TileCollection::createWithTiles([
                 new Tile(Color::CYAN),
                 new Tile(Color::CYAN),
             ])
         ),
         new Factory(
-            new TileCollection([
+            TileCollection::createWithTiles([
                 new Tile(Color::CYAN),
                 new Tile(Color::CYAN),
             ])
         ),
         new Factory(
-            new TileCollection([
+            TileCollection::createWithTiles([
                 new Tile(Color::CYAN),
                 new Tile(Color::CYAN),
             ])
         ),
         new Factory(
-            new TileCollection([
+            TileCollection::createWithTiles([
                 new Tile(Color::CYAN),
                 new Tile(Color::CYAN),
             ])
         ),
         new Factory(
-            new TileCollection([
+            TileCollection::createWithTiles([
                 new Tile(Color::CYAN),
                 new Tile(Color::CYAN),
             ])
         ),
         new Factory(
-            new TileCollection([
+            TileCollection::createWithTiles([
                 new Tile(Color::CYAN),
                 new Tile(Color::CYAN),
             ])
         ),
         new Factory(
-            new TileCollection([
+            TileCollection::createWithTiles([
                 new Tile(Color::CYAN),
                 new Tile(Color::CYAN),
             ])
@@ -341,37 +341,37 @@ test('multiple factory contents', function ($f1, $f2, $f3, $f4, $f5, $f6, $f7) {
     ],
     'one tile' => [
         new Factory(
-            new TileCollection([
+            TileCollection::createWithTiles([
                 new Tile(Color::CYAN),
             ])
         ),
         new Factory(
-            new TileCollection([
+            TileCollection::createWithTiles([
                 new Tile(Color::CYAN),
             ])
         ),
         new Factory(
-            new TileCollection([
+            TileCollection::createWithTiles([
                 new Tile(Color::CYAN),
             ])
         ),
         new Factory(
-            new TileCollection([
+            TileCollection::createWithTiles([
                 new Tile(Color::CYAN),
             ])
         ),
         new Factory(
-            new TileCollection([
+            TileCollection::createWithTiles([
                 new Tile(Color::CYAN),
             ])
         ),
         new Factory(
-            new TileCollection([
+            TileCollection::createWithTiles([
                 new Tile(Color::CYAN),
             ])
         ),
         new Factory(
-            new TileCollection([
+            TileCollection::createWithTiles([
                 new Tile(Color::CYAN),
             ])
         ),
@@ -390,9 +390,7 @@ test('cannot take from empty factory', function () {
     $round = new GameRound($t,
         [
             $f = new Factory(
-                new TileCollection([
-
-                ])
+                TileCollection::createEmpty()
             ),
         ],
         $players
@@ -406,63 +404,41 @@ test('no exception with correct num of players', function ($players) {
     $t = createGameTable();
     $factories = [
         new Factory(
-            new TileCollection([
-
-            ])
+            TileCollection::createEmpty()
         ),
         new Factory(
-            new TileCollection([
-
-            ])
+            TileCollection::createEmpty()
         ),
         new Factory(
-            new TileCollection([
-
-            ])
+            TileCollection::createEmpty()
         ),
         new Factory(
-            new TileCollection([
-
-            ])
+            TileCollection::createEmpty()
         ),
         new Factory(
-            new TileCollection([
-
-            ])
+            TileCollection::createEmpty()
         ),
     ];
     if (count($players) == 3) {
         $factories[] = new Factory(
-            new TileCollection([
-
-            ])
+            TileCollection::createEmpty()
         );
         $factories[] = new Factory(
-            new TileCollection([
-
-            ])
+            TileCollection::createEmpty()
         );
     }
     if (count($players) == 4) {
         $factories[] = new Factory(
-            new TileCollection([
-
-            ])
+            TileCollection::createEmpty()
         );
         $factories[] = new Factory(
-            new TileCollection([
-
-            ])
+            TileCollection::createEmpty()
         );
         $factories[] = new Factory(
-            new TileCollection([
-
-            ])
+            TileCollection::createEmpty()
         );
         $factories[] = new Factory(
-            new TileCollection([
-
-            ])
+            TileCollection::createEmpty()
         );
     }
     $round = new GameRound($t,
@@ -493,9 +469,7 @@ test('exception with incorrect num of players', function ($players) {
     $round = new GameRound($t,
         [
             $f = new Factory(
-                new TileCollection([
-
-                ])
+                TileCollection::createEmpty()
             ),
         ],
         $players

@@ -20,7 +20,7 @@ class BoardRow
     {
         Assert::range($maxTiles, 1, 5);
         $this->maxTiles = $maxTiles;
-        $this->tiles = new TileCollection;
+        $this->tiles = TileCollection::createEmpty();
     }
 
     public function placeTiles(TileCollection $tiles): void

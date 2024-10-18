@@ -12,19 +12,19 @@ mutates(BoardRow::class);
 test('testAdd_ExceedMinSizeCtor_GotException', function () {
     $this->expectException(InvalidArgumentException::class);
     $b = new BoardRow(0);
-    $b->placeTiles(new TileCollection([new Tile(Color::YELLOW), new Tile(Color::YELLOW)]));
+    $b->placeTiles(TileCollection::createWithTiles([new Tile(Color::YELLOW), new Tile(Color::YELLOW)]));
 });
 
 test('testAdd_ExceedMaxSizeCtor_GotException', function () {
     $this->expectException(InvalidArgumentException::class);
     $b = new BoardRow(6);
-    $b->placeTiles(new TileCollection([new Tile(Color::YELLOW), new Tile(Color::YELLOW)]));
+    $b->placeTiles(TileCollection::createWithTiles([new Tile(Color::YELLOW), new Tile(Color::YELLOW)]));
 });
 
 test('testAdd_ExceedMaxSize_GotException', function () {
     $b = new BoardRow(1);
     $this->expectException(BoardRowSizeExceededException::class);
-    $b->placeTiles(new TileCollection([new Tile(Color::YELLOW), new Tile(Color::YELLOW)]));
+    $b->placeTiles(TileCollection::createWithTiles([new Tile(Color::YELLOW), new Tile(Color::YELLOW)]));
 });
 
 test('testAddTile_ExceedMaxSize_GotException', function () {
@@ -36,7 +36,7 @@ test('testAddTile_ExceedMaxSize_GotException', function () {
 
 test('testAdd_OneTileIn2MaxSize_Okay', function () {
     $b = new BoardRow(2);
-    $b->placeTiles(new TileCollection([new Tile(Color::YELLOW)]));
+    $b->placeTiles(TileCollection::createWithTiles([new Tile(Color::YELLOW)]));
     $this->assertEquals(1, $b->getEmptySlotsCount());
 });
 
@@ -50,12 +50,12 @@ test('testAdd_TwoDifferentColors_GotException', function () {
 test('testAddTiles_DifferentColors_GotException', function () {
     $b = new BoardRow(5);
     $this->expectException(BoardRowVariousColorsException::class);
-    $b->placeTiles(new TileCollection([new Tile(Color::YELLOW), new Tile(Color::RED)]));
+    $b->placeTiles(TileCollection::createWithTiles([new Tile(Color::YELLOW), new Tile(Color::RED)]));
 });
 
 test('testGetEmptySLots_3of5_2Empty', function () {
     $b = new BoardRow(5);
-    $b->placeTiles(new TileCollection([new Tile(Color::RED), new Tile(Color::RED), new Tile(Color::RED)]));
+    $b->placeTiles(TileCollection::createWithTiles([new Tile(Color::RED), new Tile(Color::RED), new Tile(Color::RED)]));
     $this->assertEquals(2, $b->getEmptySlotsCount());
 });
 

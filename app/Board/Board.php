@@ -49,7 +49,7 @@ class Board
         $this->row3 = new BoardRow(3);
         $this->row4 = new BoardRow(4);
         $this->row5 = new BoardRow(5);
-        $this->floorLine = new TileCollection;
+        $this->floorLine = TileCollection::createEmpty();
     }
 
     /**
@@ -145,7 +145,7 @@ class Board
 
     public function discardTiles(): TileCollection
     {
-        $tiles = new TileCollection;
+        $tiles = TileCollection::createEmpty();
         foreach ($this->getRows() as $row) {
             if (isset($this->rowNumberToDiscard[$row->getRowNumber()])) {
                 foreach ($row->getTiles()->takeAllTiles() as $tile) {

@@ -54,29 +54,29 @@ function createGameTable(): \App\Game\Table
 }
 function addTile(BoardRow $row, Tile $tile): void
 {
-    $row->placeTiles(new TileCollection([$tile]));
+    $row->placeTiles(TileCollection::createWithTile($tile));
 }
 function buildBlueTiles(int $numberOfTiles): TileCollection
 {
-    return new TileCollection(array_fill(1, $numberOfTiles, new Tile(Color::BLUE)));
+    return TileCollection::createWithTiles(array_fill(1, $numberOfTiles, new Tile(Color::BLUE)));
 }
 
 function buildBlackTiles(int $numberOfTiles): TileCollection
 {
-    return new TileCollection(array_fill(1, $numberOfTiles, new Tile(Color::BLACK)));
+    return TileCollection::createWithTiles(array_fill(1, $numberOfTiles, new Tile(Color::BLACK)));
 }
 
 function buildCyanTiles(int $numberOfTiles): TileCollection
 {
-    return new TileCollection(array_fill(1, $numberOfTiles, new Tile(Color::CYAN)));
+    return TileCollection::createWithTiles(array_fill(1, $numberOfTiles, new Tile(Color::CYAN)));
 }
 
 function buildYellowTiles(int $numberOfTiles): TileCollection
 {
-    return new TileCollection(array_fill(1, $numberOfTiles, new Tile(Color::YELLOW)));
+    return TileCollection::createWithTiles(array_fill(1, $numberOfTiles, new Tile(Color::YELLOW)));
 }
 
 function buildRedTiles(int $numberOfTiles): TileCollection
 {
-    return new TileCollection(array_fill(1, $numberOfTiles, new Tile(Color::RED)));
+    return TileCollection::createWithTiles(array_fill(1, $numberOfTiles, new Tile(Color::RED)));
 }

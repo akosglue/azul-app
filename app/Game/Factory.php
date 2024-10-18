@@ -29,8 +29,8 @@ class Factory implements ITileStorage
 
     public function take(string $color): TileCollection
     {
-        $tilesByColor = new TileCollection;
-        $tilesLeft = new TileCollection;
+        $tilesByColor = [];
+        $tilesLeft = [];
         // TODO probably tile collection should not be list -_-
         foreach ($this->tiles as $tile) {
             if ($tile->isSameColor($color)) {
@@ -43,7 +43,7 @@ class Factory implements ITileStorage
         // TODO either do everything only with asserts or only with exceptions
         $this->tiles = new TileCollection($tilesLeft);
 
-        return $tilesByColor;
+        return new TileCollection($tilesByColor);
     }
 
     public function getTilesCount(?string $color = null): int
